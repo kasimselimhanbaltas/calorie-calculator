@@ -1,0 +1,52 @@
+.categories {
+  background-color: #121629 !important;
+}
+
+.card {
+  width: 250px;
+  height: 300px;
+  text-align: center;
+  border: 0px;
+  background-color: #121629;
+  color: white;
+  border-radius: 0;
+  cursor: pointer;
+  transition: all .2s;
+}
+.card:hover {
+  scale: 1.1;
+}
+.image-container {
+  height: 125px;
+  align-items: center;
+  align-content: center;
+  overflow: hidden;
+  position: relative;
+}
+.card img{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translateY(-50%) translateX(-50%);
+  width: 100%;
+}
+p {
+  margin: 0 5px;
+  line-height: 18px;
+  font-size: 15px;
+}
+.my-divider {
+  margin: 10px auto;
+  height: 3px;
+  width: 200px;
+  background-color: white !important;
+  padding: 1px;
+  content: '';
+  margin-bottom: 10px;
+}
+.card-bottom {
+  position: absolute;
+  bottom: 5%;
+  left: 50%;
+  transform: translateX(-50%);
+}

@@ -1,0 +1,90 @@
+<!-- Modal -->
+<div class="modal fade modal-xl text-light" id="editModal" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="ms-auto" style="font-size: 25px; font-weight: bold;" id="staticBackdropLabel">
+          <h1 class="modal-title mb-0" *ngIf="editing">Edit Nutrient</h1>
+          <h1 class="modal-title mb-0" *ngIf="!editing">Nutrient Details</h1>
+        </div>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="">
+          <div class="text-center ms-auto me-auto bg-secondary p-4 rounded">
+
+            <div *ngIf="!editing">
+              <div class="row">
+                <div class="col-6">
+                  <img class="rounded img-fluid" [src]="selectedFood.imageURL" alt="">
+                </div>
+                <div class="col-6 ">
+                  <div class="row text-left" *ngFor="let item of selectedFood | keyvalue; let i = index">
+                    <div *ngIf="i !== 7" class="col-6 property">
+                      <p>{{ item.key }}: </p>
+                    </div>
+                    <div *ngIf="i !== 7" class="col-6 value">
+                      <p>{{ item.value }}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div *ngIf="editing" class="row m-0 p-0">
+              <div class="col-4"></div>
+              <mat-form-field class="col-4">
+                <mat-label>Food</mat-label>
+                <input name="weight" matInput [(ngModel)]="selectedFood.Food" placeholder="Ex: Bread, cracked wheat">
+              </mat-form-field>
+              <div class="col-4"></div>
+              <mat-form-field class="col-2 mb-3">
+                <mat-label>Grams</mat-label>
+                <input name="weight" matInput [(ngModel)]="selectedFood.Grams" placeholder="Ex: 23">
+              </mat-form-field>
+              <mat-form-field class="col-2 mb-3">
+                <mat-label>Calories</mat-label>
+                <input name="weight" matInput [(ngModel)]="selectedFood.Calories" placeholder="Ex: 60">
+              </mat-form-field>
+              <mat-form-field class="col-2 mb-3">
+                <mat-label>Carbs</mat-label>
+                <input name="weight" matInput [(ngModel)]="selectedFood.Carbs" placeholder="Ex: 12">
+                <mat-hint class="text-center">*grams</mat-hint>
+              </mat-form-field>
+              <mat-form-field class="col-2 mb-3">
+                <mat-label>Fat</mat-label>
+                <input name="weight" matInput [(ngModel)]="selectedFood.Fat" placeholder="Ex: 1">
+                <mat-hint class="text-center">*grams</mat-hint>
+              </mat-form-field>
+              <mat-form-field class="col-2 mb-3">
+                <mat-label>Protein</mat-label>
+                <input name="weight" matInput [(ngModel)]="selectedFood.Protein" placeholder="Ex: 2">
+                <mat-hint class="text-center">*grams</mat-hint>
+              </mat-form-field>
+              <mat-form-field class="col-2 mb-3">
+                <mat-label>Image URL</mat-label>
+                <input name="weight" matInput [(ngModel)]="selectedFood.imageURL" placeholder="Ex: 2">
+              </mat-form-field>
+
+              <div class="radioGroup rounded">
+                <h1 class="text-center">Category</h1>
+                <mat-radio-group [(ngModel)]="selectedFood.Category" class="col-12 mb-3"
+                  aria-label="Select an option">
+                  <mat-radio-button *ngFor="let cat of baseCategories" [value]="cat">{{cat}}</mat-radio-button>
+                </mat-radio-group>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button *ngIf="editing" (click)="deleteNutrient()" class="btn btn-danger px-2">Delete</button>
+        <button *ngIf="!editing" (click)="editing = true" class="btn btn-info px-2">Edit</button>
+        <button *ngIf="editing" (click)="editing = false" class="btn btn-secondary px-2">Cancel</button>
+        <button *ngIf="editing" (click)="updateNutrient()" class="px-2" mat-raised-button color="accent">Save</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

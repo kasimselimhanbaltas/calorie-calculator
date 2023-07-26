@@ -1,17 +1,59 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
 
-import { AppRoutingModule } from './app-routing.module';
+
 import { AppComponent } from './app.component';
+import { FoodsViewComponent } from './foods-view/foods-view.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { LandingPageComponent } from './landing-page/landing-page.component';
+import { CalculatorComponent } from './daily-calories-need/calculator.component';
+import { RouterModule, Routes } from '@angular/router';
+import { NavbarComponent } from './navbar/navbar.component';
+import { LoginRegisterComponent } from './login-register/login-register.component';
 
+import { FormsModule } from '@angular/forms';
+
+import { BrowserModule } from '@angular/platform-browser';
+import { provideFirebaseApp, getApp, initializeApp } from '@angular/fire/app';
+import { getFirestore, provideFirestore } from '@angular/fire/firestore';
+import { environment } from 'src/environment';
+import { CaloriesIntakeComponent } from './calories-intake/calories-intake.component';
+import { CaloriesIntakeModalComponent } from './calories-intake-modal/calories-intake-modal.component';
+import { EditNutrientComponent } from './edit-nutrient/edit-nutrient.component';
+import { AddNutrientComponent } from './add-nutrient/add-nutrient.component';
+
+const routes: Routes = [
+  { path: '', component: LandingPageComponent },
+  { path: 'daily-calories-need', component: CalculatorComponent }, 
+  { path: 'calories-intake', component: CaloriesIntakeComponent },
+  { path: 'foods', component: FoodsViewComponent },
+];
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    LandingPageComponent,
+    NavbarComponent,
+    LoginRegisterComponent,
   ],
   imports: [
+    AddNutrientComponent,
+    CalculatorComponent, 
+    CaloriesIntakeComponent,
+    CaloriesIntakeModalComponent,
+    FoodsViewComponent,
+    EditNutrientComponent,
     BrowserModule,
-    AppRoutingModule
+    BrowserAnimationsModule,
+    RouterModule.forRoot(routes),
+    FormsModule,
+    BrowserModule,
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideFirestore(() => getFirestore()),
+
   ],
+  exports: [
+    RouterModule
+  ]
+  ,
   providers: [],
   bootstrap: [AppComponent]
 })

@@ -1,0 +1,19 @@
+.modal-content {
+  background-color: #262626 !important;
+}
+
+.cdk-global-overlay-wrapper, .cdk-overlay-container { z-index: 9999!important; } 
+.cdk-overlay-connected-position-bounding-box {
+  z-index: 99999 !important;
+}
+img {
+  max-height: 200px;
+}
+.property p, .value p{
+  margin: 0;
+  padding: 0;
+  text-align: left !important;
+}
+.radioGroup {
+  background-color: #262626;
+}
