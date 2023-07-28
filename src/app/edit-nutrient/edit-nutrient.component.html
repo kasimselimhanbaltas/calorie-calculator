@@ -17,7 +17,7 @@
             <div *ngIf="!editing">
               <div class="row">
                 <div class="col-6">
-                  <img class="rounded img-fluid" [src]="selectedFood.imageURL" alt="">
+                  <img *ngIf="selectedFood" class="rounded img-fluid" [src]="selectedFood.imageURL" alt="">
                 </div>
                 <div class="col-6 ">
                   <div class="row text-left" *ngFor="let item of selectedFood | keyvalue; let i = index">

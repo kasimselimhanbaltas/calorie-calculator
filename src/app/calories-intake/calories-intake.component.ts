@@ -1,14 +1,132 @@
-import { Component } from '@angular/core';
-import {MatDividerModule} from '@angular/material/divider';
-import { CaloriesIntakeModalComponent } from '../calories-intake-modal/calories-intake-modal.component';
+import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
+//import { getFoods } from '../../firebase/firebase';
+
+import { inject } from '@angular/core';
+import { Firestore, collectionData, collection, addDoc } from '@angular/fire/firestore';
+import { SharedService } from 'src/services/sharedService';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { MatDividerModule } from '@angular/material/divider';
+import { EditNutrientComponent } from '../edit-nutrient/edit-nutrient.component';
+import { AddNutrientComponent } from '../add-nutrient/add-nutrient.component';
+import { food } from '../foods-view/foods-view.component';
+import { NgOptimizedImage } from '@angular/common'
+
+export interface intakeNutrient {
+  Food: string,
+  Grams: number,
+  CaloriesPerGram: number,
+  imageURL: string
+}
 
 @Component({
   selector: 'app-calories-intake',
   templateUrl: './calories-intake.component.html',
   styleUrls: ['./calories-intake.component.css'],
   standalone: true,
-  imports: [MatDividerModule, CaloriesIntakeModalComponent],
+  imports: [MatCheckboxModule, CommonModule, FormsModule, MatDividerModule, EditNutrientComponent, AddNutrientComponent, NgOptimizedImage]
 })
-export class CaloriesIntakeComponent {
+export class CaloriesIntakeComponent implements OnInit, OnChanges {
 
+  fetchedFoods: food[] | any = [];
+  foodsViewing: food[] = [];
+  filteredFV: food[] = [];
+  savedNutrients: intakeNutrient[] = [];
+
+  intakeNutrients: intakeNutrient[] = [];
+
+  selectedCategories: { [category: string]: boolean } = {};
+  baseCategories: Array<string> = [
+    "Meat, Poultry",
+    "Breads, cereals, fastfood,grains",
+    "Drinks,Alcohol, Beverages",
+    "Desserts, sweets",
+    "Vegetables A-E",
+    "Vegetables F-P",
+    "Vegetables R-Z",
+    "Fruits A-F",
+    "Fruits G-P",
+    "Fruits R-Z",
+    "Fish, Seafood",
+    "Seeds and Nuts",
+    "Dairy products",
+    "Jams, Jellies",
+    "Fats, Oils, Shortenings",
+    "Soups"
+  ]
+
+
+  deleteSavedNutrient(index) {
+    console.log("delete: ", index)
+    this.sharedService.deleteFromIntakeNutrients(index);
+  }
+  getTotalCalories(): number {
+    return this.intakeNutrients.reduce((total, nutrient) => {
+      return total + nutrient.Grams * nutrient.CaloriesPerGram;
+    }, 0);
+  }
+
+  async ngOnInit(): Promise<void> {
+    (await this.sharedService.getFoods()).subscribe(foods => {
+      this.fetchedFoods = foods;
+      this.foodsViewing = this.fetchedFoods;
+      this.filteredFV = this.foodsViewing;
+    });
+    (await this.sharedService.getIntakeNutrients()).subscribe(intakeNutrients => {
+      this.intakeNutrients = intakeNutrients;
+    })
+  }
+  firestore: Firestore = inject(Firestore);
+
+  setList() {
+    this.sharedService.setList(this.fetchedFoods);
+  }
+
+  constructor(private sharedService: SharedService) {
+  }
+  ngOnChanges(changes: SimpleChanges): void {
+    this.foodsViewing = this.fetchedFoods;
+    this.filteredFV = this.foodsViewing;
+    this.onInputChange();
+  }
+  searchValue: string = '';
+  onInputChange(): void {
+    this.filteredFV = this.foodsViewing.filter(item => item.Food.toLowerCase().includes(this.searchValue.toLowerCase()));
+  }
+  get sortedFoodsViewing(): food[] {
+    return this.foodsViewing.sort((a, b) => a.Food.localeCompare(b.Food));
+  }
+  selectFood(item: food, index: number){
+    this.sharedService.setSelectedFood(item);
+    this.sharedService.setSelectedIndex(index);
+  }
+
+  filterByCategory() {
+    this.foodsViewing = [];
+    let checkCheck = true;
+    for (const category in this.selectedCategories) {
+      if (this.selectedCategories[category]){ // check if no categories selected
+        checkCheck = false;
+      }
+    }
+    if(checkCheck){
+      this.foodsViewing = this.fetchedFoods;
+      this.filteredFV = this.foodsViewing;
+      this.onInputChange();
+      return;
+    }
+    for (const category in this.selectedCategories) {
+      if (this.selectedCategories[category]) {
+        // Filter the fetchedFoods list based on the selected category
+        const filteredItems = this.fetchedFoods.filter((foodItem) => foodItem.Category === category);
+
+        // Concatenate the filtered items to the existing list
+        this.foodsViewing = this.foodsViewing.concat(filteredItems);
+      }
+    }
+    this.filteredFV = this.foodsViewing;
+    this.onInputChange();
+  }
 }
+

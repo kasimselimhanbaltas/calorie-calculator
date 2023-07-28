@@ -12,6 +12,7 @@ import {MatRadioModule} from '@angular/material/radio';
 import { Firestore, collectionData, collection, addDoc } from '@angular/fire/firestore';
 import {food} from "../foods-view/foods-view.component"
 import { SharedService } from 'src/services/sharedService';
+import { intakeNutrient } from '../calories-intake/calories-intake.component';
 
 
 
@@ -59,7 +60,18 @@ export class CaloriesIntakeModalComponent implements OnInit  {
       console.log(this.selectedFood);
     });
   }
- 
+  addToIntakeNutrientsList(food) {
+    console.log("modal//")
+    let caloriesPerGram: number = (food.Calories / food.Grams);
+    let newNutirentToSave: intakeNutrient = {
+      Food: food.Food,
+      Grams: this.grams,
+      CaloriesPerGram: Math.round( caloriesPerGram * 1e2 ) / 1e2,
+      imageURL: food.imageURL
+    }
+    this.sharedService.addToIntakeNutrients(newNutirentToSave)
+    // this.grams = null;
+  }
 
   // addNutrient() {
   //   let objToInsert: food = {

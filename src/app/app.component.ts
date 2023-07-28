@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Output } from '@angular/core';
 import "../../node_modules/bootstrap/dist/js/bootstrap.min.js"
 
 @Component({
@@ -8,4 +8,8 @@ import "../../node_modules/bootstrap/dist/js/bootstrap.min.js"
 })
 export class AppComponent {
   title = 'calorie-calculator';
+  nutrientVar: any;
+  // onNutrientDeleted(nutrient: any) {
+  //   this.nutrientVar = nutrient;
+  // }
 }

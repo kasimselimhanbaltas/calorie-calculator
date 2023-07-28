@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, DoCheck} from '@angular/core';
 //import { getFoods } from '../../firebase/firebase';
+import {MatPaginatorModule, PageEvent} from '@angular/material/paginator';
 
 import { inject } from '@angular/core';
 import { Firestore, collectionData, collection, addDoc } from '@angular/fire/firestore';
@@ -27,14 +28,26 @@ export interface food {
   templateUrl: './foods-view.component.html',
   styleUrls: ['./foods-view.component.css'],
   standalone: true,
-  imports: [MatCheckboxModule, CommonModule, FormsModule, MatDividerModule, EditNutrientComponent, AddNutrientComponent]
+  imports: [MatCheckboxModule, CommonModule, FormsModule, MatDividerModule, EditNutrientComponent, AddNutrientComponent, MatPaginatorModule]
 })
-export class FoodsViewComponent implements OnInit {
+export class FoodsViewComponent implements OnInit, DoCheck {
 
   fetchedFoods: food[] | any = [];
   foodsViewing: food[] = [];
   filteredFV: food[] = [];
-  editModal = document.getElementById('editModal');
+  foodsPF: food[] = []; // paginated and filtered
+
+  length = 50;
+  pageSize = 10;
+  pageIndex = 0;
+  pageSizeOptions = [5, 10, 25];
+
+  hidePageSize = false;
+  showPageSizeOptions = true;
+  showFirstLastButtons = true;
+  disabled = false;
+
+  pageEvent: PageEvent;
 
   selectedCategories: { [category: string]: boolean } = {};
   baseCategories: Array<string> = [
@@ -55,12 +68,38 @@ export class FoodsViewComponent implements OnInit {
     "Fats, Oils, Shortenings",
     "Soups"
   ]
+
+  handlePageEvent(e: PageEvent) {
+    console.log("current page: ", e.pageIndex)
+    this.pageEvent = e;
+    this.length = e.length;
+    this.pageSize = e.pageSize;
+    this.pageIndex = e.pageIndex;
+    this.updatePFList();
+
+  }
+  updatePFList() {
+    this.foodsViewing = this.fetchedFoods;
+    this.filteredFV = this.foodsViewing;
+    this.onInputChange();
+    this.foodsPF = []
+    for (let i = this.pageIndex*this.pageSize; i < (this.pageIndex+1)*this.pageSize; i++) {
+      console.log(i)
+      this.foodsPF.push(this.fetchedFoods[i]);
+    }
+  }
+  
+  ngDoCheck(): void {
+    this.foodsViewing = this.fetchedFoods;
+    this.filteredFV = this.foodsViewing;
+    this.onInputChange();
+  }
+
   async ngOnInit(): Promise<void> {
     (await this.sharedService.getFoods()).subscribe(foods => {
       this.fetchedFoods = foods;
-      this.foodsViewing = this.fetchedFoods;
-      console.log("lennnnn: ", this.fetchedFoods.length)
-      this.filteredFV = this.foodsViewing;
+      this.updatePFList();
+
     });
   }
   firestore: Firestore = inject(Firestore);
@@ -71,8 +110,10 @@ export class FoodsViewComponent implements OnInit {
 
   constructor(private sharedService: SharedService) {
   }
+
   searchValue: string = '';
   onInputChange(): void {
+    console.log("fvlen", this.foodsViewing.length)
     this.filteredFV = this.foodsViewing.filter(item => item.Food.toLowerCase().includes(this.searchValue.toLowerCase()));
   }
   get sortedFoodsViewing(): food[] {

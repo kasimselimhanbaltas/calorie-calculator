@@ -2,6 +2,7 @@ import {Injectable, inject} from "@angular/core";
 import { DocumentData, Firestore, collection, collectionData, query, getDocs, setDoc, doc, getDoc  } from "@angular/fire/firestore";
 import { food } from "src/app/foods-view/foods-view.component";
 import { Observable, Subject, map, zip } from 'rxjs';
+import { intakeNutrient } from "src/app/calories-intake/calories-intake.component";
 
 interface footToCalc {
   Calories: number,
@@ -21,18 +22,32 @@ export class SharedService {
   public foodsList: food[] = [];
   private foodsList$: Observable<food[]> | null;
   public selectedIndex: number;
+  public intakeNutrients: intakeNutrient[] = [];
 
 
   private selectedFoodSubject = new Subject<food>();
   private selectedIndexSubject = new Subject<number>();
-  private foodsListSubject = new Subject<food[]>();
+  private intakeNutrientsSubject = new Subject<intakeNutrient[]>();
   private selectedFood: food | null = null;
+
+  addToIntakeNutrients(intakeNutrientI: intakeNutrient) {
+    console.log("adding: ", intakeNutrientI)
+    this.intakeNutrients.push(intakeNutrientI);
+    console.log("list: ", this.intakeNutrients)
+    this.intakeNutrientsSubject.next(this.intakeNutrients);
+  }
+  deleteFromIntakeNutrients(index: number) {
+    this.intakeNutrients.splice(index, 1);
+    this.intakeNutrientsSubject.next(this.intakeNutrients);
+  }
+  getIntakeNutrients(): Observable<intakeNutrient[]> {
+    return this.intakeNutrientsSubject.asObservable();
+  }
 
   setSelectedFood(food: food) {
     console.log("service :", food)
     this.selectedFood = food;
     this.selectedFoodSubject.next(food);
-    console.log("sfs", this.selectedFoodSubject);
   }
 
   getSelectedFood(): Observable<food> {
@@ -63,8 +78,18 @@ export class SharedService {
     this.setList(this.foodsList);
   }
   // Updates a single nutrient and updates the cloud
-  public updateList(food, index) {
-    this.foodsList[index] = food; // Update the edited food in the list
+  public updateList(food) {
+    let foodIndex: number = null;
+    for (let index = 0; index < this.foodsList.length; index++){
+      if(food.Food == this.foodsList[index].Food) {
+        foodIndex = index;
+        break;
+      }
+    }
+    if(foodIndex == null) {
+      return;
+    }
+    this.foodsList[foodIndex] = food; // Update the edited food in the list
     this.setList(this.foodsList); // Update the cloud
   }
 

@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, EventEmitter, inject, OnInit, Output } from '@angular/core';
 import {MatSelectModule} from '@angular/material/select';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
@@ -36,6 +36,8 @@ export class EditNutrientComponent implements OnInit {
   }
   constructor(public sharedService: SharedService) {}
 
+  @Output() nutrientDeleted: EventEmitter<any> = new EventEmitter<any>();
+
   food: string = '';
   category: string = '';
   grams: number | any = '';
@@ -72,7 +74,7 @@ export class EditNutrientComponent implements OnInit {
 
   updateNutrient() {
     this.editing = false;
-    this.sharedService.updateList(this.selectedFood, this.selectedIndex)
+    this.sharedService.updateList(this.selectedFood)
   }
 
   deleteNutrient() {
@@ -80,6 +82,7 @@ export class EditNutrientComponent implements OnInit {
     if(this.selectedIndex >= 0 && this.selectedIndex != null){      
       this.sharedService.deleteFood(this.selectedFood);
       this.editing = false;
+      this.nutrientDeleted.emit(this.selectedIndex);
     } else {  
       console.log("wtf with index: ", this.selectedIndex);
     }

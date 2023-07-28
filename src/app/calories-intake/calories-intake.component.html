@@ -1,20 +1,92 @@
-<div class="container text-light">
-  <div class="food-container row">
-    <div class="col-3">
-      <div class="card d-inline-block position-relative my-3" data-bs-toggle="modal"
-        data-bs-target="#calories-intake-modal">
-        <div class="image-container">
-          <img src="https://suebeehomemaker.com/wp-content/uploads/2022/04/cracked-wheat-bread-recipecard.jpg" alt="">
+<div class="row m-0 p-0 text-light">
+  <div class="categories col-2 p-3 bg-secondary pt-1 fixed-content">
+    <h1 class="text-center">Categories</h1>
+    <div *ngFor="let category of baseCategories.sort()">
+      <mat-checkbox (click)="filterByCategory()" class="example-margin" [(ngModel)]="selectedCategories[category]">
+        <p class="m-0">{{ category }}</p>
+      </mat-checkbox>
+    </div>
+  </div>
+  <div class="col-10  ms-auto me-auto">
+    <div class="container text-light">
+      <div class="food-container row">
+
+        
+
+        <div class="col-8"></div>
+
+        <div class="col-2 mt-2 p-0">
+          <input class="form-control mx-auto" type="search" placeholder="Search" aria-label="Search" name="input"
+            [(ngModel)]="searchValue" (ngModelChange)="onInputChange()">
         </div>
-        <p class="text-center mt-3">Bread, cracked wheat</p>
-        <mat-divider class="mt-3"></mat-divider>
-        <p class="mt-3">Breads, cereals, fastfood,grains</p>
-        <div class="card-bottom">
-          <div class="my-divider "></div>
-          <p class="">5 cal/gr</p>
+        <div class="col-2 mt-2 p-0 text-center">
+          <button data-bs-toggle="modal" data-bs-target="#detailsModal" class="btn btn-success ">Add new
+            nutrient</button>
+        </div>
+        <div class="col-12 row">
+          <div class="col-8 row">
+            <div *ngIf="filteredFV.length == 0" class="col-12">
+              <h1 style="cursor: pointer;" class="text-center mt-5" data-bs-toggle="modal"
+                data-bs-target="#detailsModal">
+                No results were found matching your search data. Want to add a new nutrient? </h1>
+            </div>
+
+            <div class="col-4 text-center" *ngFor="let item of filteredFV; index as i">
+              <div class="card d-inline-block position-relative my-3" (click)="selectFood(item, i)"
+                data-bs-toggle="modal" data-bs-target="#calories-intake-modal">
+                <div class="image-container">
+                  <!-- <img src="https://pizzavitals.com/wp-content/uploads/2023/01/14-inch-pizza-1024x576.png" alt=""> -->
+                  <img [src]="item.imageURL" alt="">
+                </div>
+                <p class="text-center mt-3">{{ item.Food }}</p>
+                <mat-divider class="mt-3"></mat-divider>
+                <p class="mt-3">{{ item.Category }}</p>
+                <div class="card-bottom">
+                  <div class="my-divider "></div>
+                  <p class="">{{ (item.Calories / item.Grams).toFixed(2) }} Cal/g</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-4">
+            <div class="rounded selectedNutrientsContainer ms-5 my-3">
+              <div class="result">
+                <h3 class="text-end me-3" *ngIf="intakeNutrients.length != 0">
+                  Total Calories: {{ getTotalCalories() }}
+                </h3>
+                <div class="my-divider"></div>
+              </div>
+              <div class="row">
+    
+                <div class="col-4 m-4 savedNutrient" *ngFor="let intakeNutrient of intakeNutrients; index as i">
+                  <div class="imgcontainer">
+                    <img [ngSrc]="intakeNutrient.imageURL" width="400" height="200" class="" alt="">
+                  </div>
+    
+                  <button class="deleteSavedNutrientButton" (click)="deleteSavedNutrient(i)">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                      class="bi bi-x closeIcon" viewBox="0 0 16 16">
+                      <path
+                        d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
+                    </svg>
+                  </button>
+                  <p style="bottom: 10% !important">{{ intakeNutrient.Grams * intakeNutrient.CaloriesPerGram }} Calories</p> 
+    
+                  <p>{{ intakeNutrient.Grams }}g</p>
+    
+                </div>
+              </div>
+
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
+
+  <!-- <button (click)="addData()" class="btn btn-primary p-2">Add data</button> -->
+
 </div>
-<app-calories-intake-modal></app-calories-intake-modal>
+
+
+

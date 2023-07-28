@@ -1,6 +1,7 @@
 <div class="row m-0 p-0 text-light">
-  <div class="categories col-2 p-5 bg-secondary ps-3">
-    <h1 class="text-center">Categories</h1>
+  <mat-divider></mat-divider>
+  <div class="categories col-2 p-3 bg-secondary pt-1">
+    <h1 class="text-center m-0 mt-2">Categories</h1>
     <div *ngFor="let category of baseCategories.sort()">
       <mat-checkbox (click)="filterByCategory()" class="example-margin" [(ngModel)]="selectedCategories[category]">
         <p class="m-0">{{ category }}</p>
@@ -11,7 +12,20 @@
     <div class="container text-light">
       <div class="food-container row">
 
-        <div class="col-8"></div>
+        <div class="col-8">
+          <mat-paginator class="bg-transparent" 
+          #paginator
+          (page)="handlePageEvent($event)"
+          [length]="foodsViewing.length"
+          [pageSize]="pageSize"
+          [disabled]="disabled"
+          [showFirstLastButtons]="showFirstLastButtons"
+          [pageSizeOptions]="showPageSizeOptions ? pageSizeOptions : []"
+          [hidePageSize]="hidePageSize"
+          [pageIndex]="pageIndex"
+          aria-label="Select page">
+          </mat-paginator>
+        </div>
 
         <div class="col-2 mt-2 p-0">
           <input class="form-control mx-auto" type="search" placeholder="Search" aria-label="Search" name="input"
@@ -27,9 +41,10 @@
             No results were found matching your search data. Want to add a new nutrient? </h1>
         </div>
 
-        <div class="col-3 text-center" *ngFor="let item of filteredFV; index as i" data-bs-toggle="modal"
-          data-bs-target="#editModal" (click)="selectFood(item, i)">
-          <div class="card d-inline-block position-relative my-3">
+        <div class="col-3 text-center" *ngFor="let item of foodsPF; index as i">
+          
+          <div *ngIf="item.imageURL" class="card d-inline-block position-relative my-3" (click)="selectFood(item, i)" data-bs-toggle="modal"
+            data-bs-target="#editModal">
             <div class="image-container">
               <!-- <img src="https://pizzavitals.com/wp-content/uploads/2023/01/14-inch-pizza-1024x576.png" alt=""> -->
               <img [src]="item.imageURL" alt="">
@@ -48,4 +63,5 @@
   </div>
 
   <!-- <button (click)="addData()" class="btn btn-primary p-2">Add data</button> -->
+
 </div>

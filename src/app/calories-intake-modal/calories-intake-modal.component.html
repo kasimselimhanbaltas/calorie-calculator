@@ -1,59 +1,29 @@
 <!-- Modal -->
-<div class="modal fade modal-m" id="calories-intake-modal" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
+<div *ngIf="selectedFood" class="modal fade modal-m" id="calories-intake-modal" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
   aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <h5 cl class="modal-title text-light ms-auto mb-0" style="font-size: 25px; font-weight: bold;"
-          id="staticBackdropLabel">Add Food To Today's List {{selectedFood}}</h5>
+          id="staticBackdropLabel">{{selectedFood.Food}}</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body">
+      <div class="modal-body text-light">
         <div class="">
           <div class="example-container row text-center ms-auto me-auto bg-secondary p-4 rounded">
 
-            <div class="col-4"></div>
-            <mat-form-field class="col-4 mb-3">
-              <mat-label>Food</mat-label>
-              <input name="weight" matInput [(ngModel)]="food" placeholder="Ex: Bread, cracked wheat">
-            </mat-form-field>
-            <div class="col-4"></div>
-            <div class="col"></div>
-            <mat-form-field class="col-2 mb-3">
+            <div class="col-12">
+              <img class="rounded" [src]="selectedFood.imageURL" alt="">
+            </div>
+            <div class="col-12">
+              <div class="pt-2">{{ (selectedFood.Calories / selectedFood.Grams).toFixed(2) }} Cal/g</div>
+            </div>
+            <div class="col-3"></div>
+            <mat-form-field class="col-6 text-center my-3">
               <mat-label>Grams</mat-label>
               <input name="weight" matInput [(ngModel)]="grams" placeholder="Ex: 23">
             </mat-form-field>
-            <mat-form-field class="col-2 mb-3">
-              <mat-label>Calories</mat-label>
-              <input name="weight" matInput [(ngModel)]="calories" placeholder="Ex: 60">
-            </mat-form-field>
-            <mat-form-field class="col-2 mb-3">
-              <mat-label>Carbs</mat-label>
-              <input name="weight" matInput [(ngModel)]="carbs" placeholder="Ex: 12">
-              <mat-hint class="text-center">*grams</mat-hint>
-            </mat-form-field>
-            <mat-form-field class="col-2 mb-3">
-              <mat-label>Fat</mat-label>
-              <input name="weight" matInput [(ngModel)]="fat" placeholder="Ex: 1">
-              <mat-hint class="text-center">*grams</mat-hint>
-            </mat-form-field>
-            <mat-form-field class="col-2 mb-3">
-              <mat-label>Protein</mat-label>
-              <input name="weight" matInput [(ngModel)]="protein" placeholder="Ex: 2">
-              <mat-hint class="text-center">*grams</mat-hint>
-            </mat-form-field>
-            <mat-form-field class="col-2 mb-3">
-              <mat-label>Image URL</mat-label>
-              <input name="weight" matInput [(ngModel)]="imageURL" placeholder="Ex: 2">
-              <mat-hint class="text-center">*grams</mat-hint>
-            </mat-form-field>
-            <div class="col"></div>
-
-            <h1 class="text-center">Category</h1>
-            <mat-radio-group [(ngModel)]="category" class="col-12 mb-3" aria-label="Select an option">
-              <mat-radio-button *ngFor="let cat of baseCategories" [value]="cat">{{cat}}</mat-radio-button>
-            </mat-radio-group>
-
+          
 
           </div>
 
@@ -66,7 +36,7 @@
       </div>
       <div class="modal-footer">
         <!-- (click)="addNutrient()" -->
-        <button class="px-2" mat-raised-button color="accent">Save</button>
+        <button class="px-2" mat-raised-button color="accent" (click)="addToIntakeNutrientsList(selectedFood)">Add To List</button>
         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
       </div>
     </div>
