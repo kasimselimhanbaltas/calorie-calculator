@@ -1,0 +1,40 @@
+<div class="example-container w-50 text-center ms-auto me-auto bg-secondary p-5 rounded mt-5">
+  <div *ngIf="error" class="alert alert-danger">
+    <p>{{ error }}</p>
+  </div>
+  <div *ngIf="isLoading">
+    <app-loading-spinner></app-loading-spinner>
+  </div>
+  <form #authForm="ngForm" (ngSubmit)="onSubmit(authForm)" *ngIf="!isLoading">
+    <div class="row">
+
+      <mat-form-field class="col-12">
+        <mat-label>E-mail</mat-label>
+        <input matInput [(ngModel)]="email" placeholder="Ex: yourmail@mail.com" type="email" id="email" ngModel
+          name="email" required email>
+      </mat-form-field>
+
+      <mat-form-field class="col-12">
+        <mat-label>Enter your password</mat-label>
+        <input matInput [type]="hide ? 'password' : 'text'" type="password" id="password" ngModel name="password"
+          required minlength="6">
+        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="hide">
+          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+      </mat-form-field>
+
+      <div class="col-5">
+        <button class="btn btn-primary bg-dark" type="submit" [disabled]="!authForm.valid">{{ isLoginMode ? 'Login' :
+          'Sign Up' }}</button>
+      </div>
+      <div class="col ms-auto">
+        <button class="btn btn-primary bg-dark" (click)="switchLoginMode()">Switch to {{ isLoginMode ? 'Sign Up' :
+          'Login'
+          }}</button>
+      </div>
+    </div>
+
+  </form>
+
+</div>

@@ -3,20 +3,14 @@ import { DocumentData, Firestore, collection, collectionData, query, getDocs, se
 import { food } from "src/app/foods-view/foods-view.component";
 import { Observable, Subject, map, zip } from 'rxjs';
 import { intakeNutrient } from "src/app/calories-intake/calories-intake.component";
+import { AuthService } from "src/app/auth/auth.service";
 
-interface footToCalc {
-  Calories: number,
-  Category: string,
-  Food: string,
-  Grams: number,
-
-}
 @Injectable({
   providedIn: "root",
 })
 export class SharedService {
 
-  constructor() {};
+  constructor(private authService: AuthService) {};
 
   firestore: Firestore = inject(Firestore);
   public foodsList: food[] = [];
@@ -74,6 +68,7 @@ export class SharedService {
 
   // Adds a single nutirent to list and updates the cloud
   public insertFood(food: food) {
+    //this.authService.user.pipe(take(1), )
     this.foodsList.push(food);
     this.setList(this.foodsList);
   }

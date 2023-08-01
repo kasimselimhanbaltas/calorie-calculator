@@ -8,7 +8,6 @@ import { LandingPageComponent } from './landing-page/landing-page.component';
 import { CalculatorComponent } from './daily-calories-need/calculator.component';
 import { RouterModule, Routes } from '@angular/router';
 import { NavbarComponent } from './navbar/navbar.component';
-import { LoginRegisterComponent } from './login-register/login-register.component';
 
 import { FormsModule } from '@angular/forms';
 
@@ -20,23 +19,30 @@ import { CaloriesIntakeComponent } from './calories-intake/calories-intake.compo
 import { CaloriesIntakeModalComponent } from './calories-intake-modal/calories-intake-modal.component';
 import { EditNutrientComponent } from './edit-nutrient/edit-nutrient.component';
 import { AddNutrientComponent } from './add-nutrient/add-nutrient.component';
+import { HttpClientModule } from '@angular/common/http';
+import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.component';
+import { AuthComponent } from './auth/auth.component';
+import { AuthGuard } from './auth/auth.guard';
 
 const routes: Routes = [
   { path: '', component: LandingPageComponent },
   { path: 'daily-calories-need', component: CalculatorComponent }, 
-  { path: 'calories-intake', component: CaloriesIntakeComponent },
+  { path: 'calories-intake', component: CaloriesIntakeComponent, canActivate: [AuthGuard] },
   { path: 'foods', component: FoodsViewComponent },
+  { path: 'login-register', component: AuthComponent },
 ];
 @NgModule({
   declarations: [
     AppComponent,
     LandingPageComponent,
     NavbarComponent,
-    LoginRegisterComponent,
   ],
   imports: [
+    LoadingSpinnerComponent,
+    AuthComponent,
+    HttpClientModule,
     AddNutrientComponent,
-    CalculatorComponent, 
+    CalculatorComponent,
     CaloriesIntakeComponent,
     CaloriesIntakeModalComponent,
     FoodsViewComponent,
@@ -48,7 +54,6 @@ const routes: Routes = [
     BrowserModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideFirestore(() => getFirestore()),
-
   ],
   exports: [
     RouterModule

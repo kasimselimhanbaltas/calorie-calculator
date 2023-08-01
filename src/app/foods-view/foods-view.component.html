@@ -3,7 +3,7 @@
   <div class="categories col-2 p-3 bg-secondary pt-1">
     <h1 class="text-center m-0 mt-2">Categories</h1>
     <div *ngFor="let category of baseCategories.sort()">
-      <mat-checkbox (click)="filterByCategory()" class="example-margin" [(ngModel)]="selectedCategories[category]">
+      <mat-checkbox (click)="updatePFList()" class="example-margin" [(ngModel)]="selectedCategories[category]">
         <p class="m-0">{{ category }}</p>
       </mat-checkbox>
     </div>
@@ -16,7 +16,7 @@
           <mat-paginator class="bg-transparent" 
           #paginator
           (page)="handlePageEvent($event)"
-          [length]="foodsViewing.length"
+          [length]="filteredFV.length"
           [pageSize]="pageSize"
           [disabled]="disabled"
           [showFirstLastButtons]="showFirstLastButtons"
@@ -29,10 +29,10 @@
 
         <div class="col-2 mt-2 p-0">
           <input class="form-control mx-auto" type="search" placeholder="Search" aria-label="Search" name="input"
-            [(ngModel)]="searchValue" (ngModelChange)="onInputChange()">
+            [(ngModel)]="searchValue" (ngModelChange)="updatePFList()">
         </div>
         <div class="col-2 mt-2 p-0 text-center">
-          <button data-bs-toggle="modal" data-bs-target="#detailsModal" class="btn btn-success ">Add new
+          <button *ngIf="isAuthenticated" data-bs-toggle="modal" data-bs-target="#detailsModal" class="btn btn-success ">Add new
             nutrient</button>
         </div>
 
@@ -43,10 +43,9 @@
 
         <div class="col-3 text-center" *ngFor="let item of foodsPF; index as i">
           
-          <div *ngIf="item.imageURL" class="card d-inline-block position-relative my-3" (click)="selectFood(item, i)" data-bs-toggle="modal"
+          <div *ngIf="item" class="card d-inline-block position-relative my-3 fade-in" (click)="selectFood(item, i)" data-bs-toggle="modal"
             data-bs-target="#editModal">
             <div class="image-container">
-              <!-- <img src="https://pizzavitals.com/wp-content/uploads/2023/01/14-inch-pizza-1024x576.png" alt=""> -->
               <img [src]="item.imageURL" alt="">
             </div>
             <p class="text-center mt-3">{{ item.Food }}</p>
