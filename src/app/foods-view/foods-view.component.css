@@ -1,8 +1,12 @@
+
+
+
 .categories {
   background-color: #121629 !important;
 }
 .categories p {
   font-size: 12px !important;
+  width: 100% !important;
 }
 mat-checkbox {
   height: 35px;
@@ -40,6 +44,7 @@ p {
   margin: 0 5px;
   line-height: 18px;
   font-size: 15px;
+  width: 100% !important;
 }
 .my-divider {
   margin: 10px auto;
@@ -56,3 +61,16 @@ p {
   left: 50%;
   transform: translateX(-50%);
 }
+
+mat-drawer {
+  background-color: #121629 !important;
+}
+
+@media screen and (max-width: 1200px){
+
+  .categories p {
+    font-size: 8px !important;
+  }
+  
+  }
+  

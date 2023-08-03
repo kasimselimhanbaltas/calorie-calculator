@@ -1,1 +1,28 @@
-<p class="bg-dark text-light text-center h1">landing-page works!</p>
+<mat-drawer-container class="container-fluid" autosize style="height: 100vh;">
+  <mat-drawer #drawer class="example-sidenav p-4" mode="side">
+    <p>Auto-resizing sidenav</p>
+    <p>Auto-resizing sidenav</p>
+    <p>Auto-resizing sidenav</p>
+    <p>Auto-resizing sidenav</p>
+    <p>Auto-resizing sidenav</p>
+    <p>Auto-resizing sidenav</p>
+    <p>Auto-resizing sidenav</p>
+</mat-drawer>
+
+  <div class="row">
+    <div class="col-2 bg-info"></div>
+    <div class="col-2 bg-dark"></div>
+    <div class="col-2 bg-danger">
+      <div class="example-sidenav-content">
+        <button type="button" mat-button (click)="drawer.toggle()">
+          Toggle sidenav
+        </button>
+      </div>
+    </div>
+    <div class="col-2 bg-dark"></div>
+    <div class="col-2 bg-info"></div>
+    <div class="col-2 bg-info"></div>
+  </div>
+
+
+</mat-drawer-container>

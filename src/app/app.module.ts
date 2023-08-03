@@ -34,10 +34,10 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    LandingPageComponent,
     NavbarComponent,
   ],
   imports: [
+    LandingPageComponent,
     LoadingSpinnerComponent,
     AuthComponent,
     HttpClientModule,

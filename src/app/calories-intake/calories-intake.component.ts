@@ -142,9 +142,6 @@ export class CaloriesIntakeComponent implements OnInit, DoCheck {
   isAuthenticated = false;
   private userSub: Subscription;
 
-
-
-
   async ngOnInit(): Promise<void> {
     this.userSub = this.authService.user.subscribe(user => {
       this.isAuthenticated = !!user;

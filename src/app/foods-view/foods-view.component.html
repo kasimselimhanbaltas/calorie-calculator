@@ -1,66 +1,74 @@
-<div class="row m-0 p-0 text-light">
-  <mat-divider></mat-divider>
-  <div class="categories col-2 p-3 bg-secondary pt-1">
-    <h1 class="text-center m-0 mt-2">Categories</h1>
-    <div *ngFor="let category of baseCategories.sort()">
-      <mat-checkbox (click)="updatePFList()" class="example-margin" [(ngModel)]="selectedCategories[category]">
-        <p class="m-0">{{ category }}</p>
-      </mat-checkbox>
+<mat-drawer-container class="example-container" autosize style="height: 100vh;">
+  <mat-drawer #drawer class="example-sidenav" mode="side">
+    <div class="categories col-2 p-3 pt-1 w-100">
+      <h1 class="text-center m-0 mt-2 w-100" style="min-width: 200px;">Categories</h1>
+      <div class="w-100" *ngFor="let category of baseCategories.sort()">
+        <div class="w-100">
+          <mat-checkbox (click)="updatePFList()" class="example-margin w-100" [(ngModel)]="selectedCategories[category]">
+            <p class="m-0" style="min-width: 200px;">{{ category }}</p>
+          </mat-checkbox>
+        </div>
+      </div>
     </div>
-  </div>
-  <div class="col-10  ms-auto me-auto">
-    <div class="container text-light">
-      <div class="food-container row">
+  </mat-drawer>
 
-        <div class="col-8">
-          <mat-paginator class="bg-transparent" 
-          #paginator
-          (page)="handlePageEvent($event)"
-          [length]="filteredFV.length"
-          [pageSize]="pageSize"
-          [disabled]="disabled"
-          [showFirstLastButtons]="showFirstLastButtons"
-          [pageSizeOptions]="showPageSizeOptions ? pageSizeOptions : []"
-          [hidePageSize]="hidePageSize"
-          [pageIndex]="pageIndex"
-          aria-label="Select page">
-          </mat-paginator>
-        </div>
+  <div class="row m-0 p-0 text-light">
+    <mat-divider></mat-divider>
 
-        <div class="col-2 mt-2 p-0">
-          <input class="form-control mx-auto" type="search" placeholder="Search" aria-label="Search" name="input"
-            [(ngModel)]="searchValue" (ngModelChange)="updatePFList()">
-        </div>
-        <div class="col-2 mt-2 p-0 text-center">
-          <button *ngIf="isAuthenticated" data-bs-toggle="modal" data-bs-target="#detailsModal" class="btn btn-success ">Add new
-            nutrient</button>
-        </div>
+    <div class="col-10  ms-auto me-auto">
+      <div class="container text-light">
+        <div class="food-container row">
 
-        <div *ngIf="filteredFV.length == 0" class="col-12">
-          <h1 style="cursor: pointer;" class="text-center mt-5" data-bs-toggle="modal" data-bs-target="#detailsModal">
-            No results were found matching your search data. Want to add a new nutrient? </h1>
-        </div>
+          <div class="col-2">
+            <button type="button" (click)="drawer.toggle()">
+              <h1 class="text-center m-0 mt-2">Categories</h1>
+            </button>
+          </div>
+          <div class="col-6">
+            <mat-paginator class="bg-transparent" #paginator (page)="handlePageEvent($event)"
+              [length]="filteredFV.length" [pageSize]="pageSize" [disabled]="disabled"
+              [showFirstLastButtons]="showFirstLastButtons"
+              [pageSizeOptions]="showPageSizeOptions ? pageSizeOptions : []" [hidePageSize]="hidePageSize"
+              [pageIndex]="pageIndex" aria-label="Select page">
+            </mat-paginator>
+          </div>
 
-        <div class="col-3 text-center" *ngFor="let item of foodsPF; index as i">
-          
-          <div *ngIf="item" class="card d-inline-block position-relative my-3 fade-in" (click)="selectFood(item, i)" data-bs-toggle="modal"
-            data-bs-target="#editModal">
-            <div class="image-container">
-              <img [src]="item.imageURL" alt="">
-            </div>
-            <p class="text-center mt-3">{{ item.Food }}</p>
-            <mat-divider class="mt-3"></mat-divider>
-            <p class="mt-3">{{ item.Category }}</p>
-            <div class="card-bottom">
-              <div class="my-divider "></div>
-              <p class="">{{ (item.Calories / item.Grams).toFixed(2) }} Cal/g</p>
+          <div class="col-2 mt-2 p-0">
+            <input class="form-control mx-auto" type="search" placeholder="Search" aria-label="Search" name="input"
+              [(ngModel)]="searchValue" (ngModelChange)="updatePFList()">
+          </div>
+          <div class="col-2 mt-2 p-0 text-center">
+            <button *ngIf="isAuthenticated" data-bs-toggle="modal" data-bs-target="#detailsModal"
+              class="btn btn-success ">Add new
+              nutrient</button>
+          </div>
+
+          <div *ngIf="filteredFV.length == 0" class="col-12">
+            <h1 style="cursor: pointer;" class="text-center mt-5" data-bs-toggle="modal" data-bs-target="#detailsModal">
+              No results were found matching your search data. Want to add a new nutrient? </h1>
+          </div>
+
+          <div class="col-3 text-center" *ngFor="let item of foodsPF; index as i">
+
+            <div *ngIf="item" class="card d-inline-block position-relative my-3 fade-in" (click)="selectFood(item, i)"
+              data-bs-toggle="modal" data-bs-target="#editModal">
+              <div class="image-container">
+                <img [src]="item.imageURL" alt="">
+              </div>
+              <p class="text-center mt-3">{{ item.Food }}</p>
+              <mat-divider class="mt-3"></mat-divider>
+              <p class="mt-3">{{ item.Category }}</p>
+              <div class="card-bottom">
+                <div class="my-divider "></div>
+                <p class="">{{ (item.Calories / item.Grams).toFixed(2) }} Cal/g</p>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
+
+    <!-- <button (click)="addData()" class="btn btn-primary p-2">Add data</button> -->
+
   </div>
-
-  <!-- <button (click)="addData()" class="btn btn-primary p-2">Add data</button> -->
-
-</div>
+</mat-drawer-container>

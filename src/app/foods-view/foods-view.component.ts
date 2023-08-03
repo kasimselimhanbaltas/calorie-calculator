@@ -12,6 +12,7 @@ import { EditNutrientComponent } from '../edit-nutrient/edit-nutrient.component'
 import { AddNutrientComponent } from '../add-nutrient/add-nutrient.component';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
+import {MatSidenavModule} from '@angular/material/sidenav';
 
 export interface food {
   Food: string,
@@ -29,9 +30,11 @@ export interface food {
   templateUrl: './foods-view.component.html',
   styleUrls: ['./foods-view.component.css'],
   standalone: true,
-  imports: [MatCheckboxModule, CommonModule, FormsModule, MatDividerModule, EditNutrientComponent, AddNutrientComponent, MatPaginatorModule]
+  imports: [MatCheckboxModule, CommonModule, FormsModule, MatDividerModule, EditNutrientComponent, AddNutrientComponent, MatPaginatorModule, MatSidenavModule]
 })
 export class FoodsViewComponent implements OnInit, DoCheck {
+
+  showFiller = false;
 
   private userSub: Subscription;
   isAuthenticated = false;
