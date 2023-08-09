@@ -1,6 +1,21 @@
-
-
-
+.show-categories-button {
+  position: absolute;
+  top: 0; left: 0;
+  width: 150px;
+  background-color: transparent;
+  color: white;
+  outline: none;
+  border: none;
+  user-select: none;
+}
+.show-categories-button h1{
+  padding: 0;
+  margin: 0;
+}
+.categoriesHeader{
+  cursor: pointer;
+  user-select: none;
+}
 .categories {
   background-color: #121629 !important;
 }
@@ -12,9 +27,23 @@ mat-checkbox {
   height: 35px;
 }
 
+.my-divider {
+  margin: 15px auto;
+  height: 3px;
+  width: 200px;
+  background-color: white !important;
+  padding: 1px;
+  content: '';
+  margin-bottom: 10px;
+}
+
+mat-drawer {
+  background-color: #121629 !important;
+}
+
 .card {
-  width: 250px;
-  height: 300px;
+  width: 225px;
+  height: 250px;
   text-align: center;
   border: 0px;
   background-color: #121629;
@@ -23,9 +52,11 @@ mat-checkbox {
   cursor: pointer;
   transition: all .2s;
 }
+
 .card:hover {
   scale: 1.1;
 }
+
 .image-container {
   height: 125px;
   align-items: center;
@@ -33,6 +64,7 @@ mat-checkbox {
   overflow: hidden;
   position: relative;
 }
+
 .card img{
   position: absolute;
   left: 50%;
@@ -40,37 +72,54 @@ mat-checkbox {
   transform: translateY(-50%) translateX(-50%);
   width: 100%;
 }
+
 p {
   margin: 0 5px;
   line-height: 18px;
   font-size: 15px;
   width: 100% !important;
 }
-.my-divider {
-  margin: 10px auto;
-  height: 3px;
-  width: 200px;
-  background-color: white !important;
-  padding: 1px;
-  content: '';
-  margin-bottom: 10px;
-}
+
 .card-bottom {
   position: absolute;
   bottom: 5%;
   left: 50%;
   transform: translateX(-50%);
 }
-
-mat-drawer {
-  background-color: #121629 !important;
+.searchBar {
+  width: 200px;
 }
 
-@media screen and (max-width: 1200px){
 
-  .categories p {
-    font-size: 8px !important;
+
+@media screen and (max-width: 1200px){
+  .card {
+    width: 150px;
+    height: 200px;
+    font-size: 10px !important; 
+  }
+  .image-container {
+    height: 80px;
+  }
+  p {
+    margin: 0 2px;
+    line-height: 18px;
+    font-size: 13px !important; 
+
+  }
+  .my-divider {
+    margin: 20px auto;
+    height: 3px;
+    width: 80px;
+    background-color: white !important;
+    padding: 0px !important;
+    padding-top: 1px;
+    content: '';
+    margin-bottom: 5px;
+  }
+  .mat-drawer {
+    position: absolute !important;
   }
   
-  }
+}
   

@@ -1,4 +1,4 @@
-import { Component, OnInit, DoCheck, OnChanges, SimpleChanges} from '@angular/core';
+import { Component, OnInit, DoCheck, HostListener, ViewChild } from '@angular/core';
 import {MatPaginatorModule, PageEvent} from '@angular/material/paginator';
 
 import { inject } from '@angular/core';
@@ -10,9 +10,9 @@ import { FormsModule } from '@angular/forms';
 import { MatDividerModule } from '@angular/material/divider';
 import { EditNutrientComponent } from '../edit-nutrient/edit-nutrient.component';
 import { AddNutrientComponent } from '../add-nutrient/add-nutrient.component';
-import { Subscription } from 'rxjs';
+import { Subscription, last } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
-import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatDrawer, MatSidenavModule} from '@angular/material/sidenav';
 
 export interface food {
   Food: string,
@@ -33,6 +33,43 @@ export interface food {
   imports: [MatCheckboxModule, CommonModule, FormsModule, MatDividerModule, EditNutrientComponent, AddNutrientComponent, MatPaginatorModule, MatSidenavModule]
 })
 export class FoodsViewComponent implements OnInit, DoCheck {
+
+  screenWidth: number = window.innerWidth;
+  drawerMode: any = "side"
+
+  categoryClass: string = "bg-dark";
+  showCategories = false;
+
+  @ViewChild('drawer') myDrawer!: MatDrawer;
+  lastScreenSize: number = 0;
+  
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    this.screenWidth = window.innerWidth;
+    if (this.screenWidth < 1200) {
+      if(this.lastScreenSize == 0 || this.lastScreenSize >= 1200){
+        this.drawerMode = 'over';
+        this.myDrawer.close()
+        this.showCategories = true;
+        this.lastScreenSize = this.screenWidth;
+      }
+    } 
+    if (this.screenWidth >= 1200) {
+      this.drawerMode = 'side';
+      this.lastScreenSize = this.screenWidth;
+
+    }
+    // Burada ekran genişliği değiştiğinde yapmak istediğiniz işlemleri gerçekleştirebilirsiniz.
+  }
+
+  toggleCategories() {
+    if (!this.showCategories) {
+      this.showCategories = true;
+    } else {
+      this.showCategories = false;
+    }
+    
+  }
 
   showFiller = false;
 
@@ -78,7 +115,6 @@ export class FoodsViewComponent implements OnInit, DoCheck {
   constructor(private sharedService: SharedService, private authService: AuthService) {}
 
   handlePageEvent(e: PageEvent) {
-    console.log("current page: ", e.pageIndex)
     this.pageEvent = e;
     this.length = e.length;
     this.pageSize = e.pageSize;
@@ -111,7 +147,6 @@ export class FoodsViewComponent implements OnInit, DoCheck {
     if(checkCheck){ // show all categories
       this.foodsViewing = this.fetchedFoods;
     } else {
-      console.log("selected category detected!!  ");  
       for (const category in this.selectedCategories) {
         if (this.selectedCategories[category]) {
           // Filter the fetchedFoods list based on the selected category
@@ -129,7 +164,6 @@ export class FoodsViewComponent implements OnInit, DoCheck {
     // Pagination
     this.foodsPF = []
     for (let i = this.pageIndex*this.pageSize; i < (this.pageIndex+1)*this.pageSize; i++) {
-      console.log(i)
       this.foodsPF.push(this.filteredFV[i]);
     }
 
@@ -148,6 +182,11 @@ export class FoodsViewComponent implements OnInit, DoCheck {
       this.fetchedFoods = foods;
       this.updatePFList();
     });
+    if(window.innerWidth < 1200){
+      this.drawerMode = 'over';
+      this.myDrawer.close()
+      this.showCategories = true;
+    }
   }
   firestore: Firestore = inject(Firestore);
 

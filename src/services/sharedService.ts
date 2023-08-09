@@ -1,7 +1,7 @@
 import {Injectable, inject} from "@angular/core";
-import { DocumentData, Firestore, collection, collectionData, query, getDocs, setDoc, doc, getDoc  } from "@angular/fire/firestore";
+import { Firestore, setDoc, doc, getDoc  } from "@angular/fire/firestore";
 import { food } from "src/app/foods-view/foods-view.component";
-import { Observable, Subject, map, zip } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { intakeNutrient } from "src/app/calories-intake/calories-intake.component";
 import { AuthService } from "src/app/auth/auth.service";
 
