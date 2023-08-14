@@ -16,7 +16,15 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   isAuthenticated = false;
   private userSub: Subscription;
+  warningClass= "";
 
+  updateWarningClass() {
+    if(this.isAuthenticated) return;
+    this.warningClass = "warning"
+    setTimeout(() => {
+      this.warningClass = "";
+    }, 3000);
+  }
   constructor(private authService: AuthService, private router: Router) {}
 
   customRoute(path: string) {

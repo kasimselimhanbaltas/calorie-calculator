@@ -1,5 +1,5 @@
 <div class="position-relative">
-  <div class="position-absolute text-white translate-middle display-block" [ngClass]="">
+  <div class="position-absolute text-white translate-middle display-block" [ngClass]="warningClass">
     <div class="bg-danger p-2 px-5 rounded">
       <h3>You need to sign in to use this feature.</h3>
     </div>
@@ -29,7 +29,7 @@
               <li>
                 <hr class="dropdown-divider bg-light">
               </li>
-              <li><a class="dropdown-item btn" routerLink="calories-intake">How Much I Ate</a></li>
+              <li><a class="dropdown-item btn" routerLink="calories-intake" (click)="updateWarningClass()">How Much I Ate</a></li>
             </ul>
           </li>
 
