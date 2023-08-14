@@ -16,16 +16,22 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   isAuthenticated = false;
   private userSub: Subscription;
-  warningClass= "";
+  warningClass = "";
+  warningActive = false;
 
   updateWarningClass() {
-    if(this.isAuthenticated) return;
-    this.warningClass = "warning"
-    setTimeout(() => {
-      this.warningClass = "";
-    }, 3000);
+    if (this.isAuthenticated) return;
+    if (!this.warningActive) {
+      console.log("warningA: ", this.warningActive)
+      this.warningClass = "warning"
+      this.warningActive = true;
+      setTimeout(() => {
+        this.warningClass = "";
+        this.warningActive = false
+      }, 3000);
+    }
   }
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService, private router: Router) { }
 
   customRoute(path: string) {
     this.router.navigate([path]);

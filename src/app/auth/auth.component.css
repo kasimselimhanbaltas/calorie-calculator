@@ -1,0 +1,10 @@
+.bgImage {
+  position: absolute;
+  top: 0%; left: 0%;
+  opacity: .5;
+  scale: 2.5;
+  z-index: 9;
+}
+.main-container {
+  overflow: hidden;
+}
