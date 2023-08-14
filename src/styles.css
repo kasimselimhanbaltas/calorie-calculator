@@ -23,8 +23,25 @@ mat-hint {
     opacity: 1;
   }
 }
+
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
+.enter-from-left {
+  animation: efl .7s ease-in-out;
+}
+@keyframes efl{
+  0% {
+    opacity: 0;
+    transform: translateX(-5%);
+  }
+  100% {
+    transform: translateX(0%);
+    opacity: 1;
+  }
+}
+
+
+

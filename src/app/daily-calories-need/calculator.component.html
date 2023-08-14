@@ -1,52 +1,56 @@
-<h1 class="text-center text-light p-3" style="font-size: 30px; font-weight: bold;">How many calories should I eat in a day?</h1>
-<div class="text-light" *ngIf="result != 0">
-  <h1 class="text-center"> To maintain your current weight, you must consume {{ result }} calories per day.</h1>
-</div>
-<div class="">
-  <div class="example-container row text-center ms-auto me-auto justify-content-center">
-    <div class="col-10 col-md-8 col-xl-6 bg-secondary p-2 p-md-5 pt-4 rounded ">
+<div class="fade-in">
 
-      <mat-form-field class="col-10 col-md-5 m-1 m-md-3">
-        <mat-label>Weight</mat-label>
-        <input name="weight" type="number" matInput [(ngModel)]="weight" placeholder="Ex: 75 kg">
-        <mat-hint class="text-center">Please enter your weight as kg</mat-hint>
-      </mat-form-field>
-  
-      <mat-form-field class="col-10 col-md-5 m-1 m-md-3">
-        <mat-label>Height</mat-label>
-        <input type="number" matInput [(ngModel)]="height"  placeholder="Ex: 175 cm">
-        <mat-hint class="text-center">Please enter your height as cm</mat-hint>
-      </mat-form-field>
-  
-      <mat-form-field class="col-5 col-md-5 m-1 m-md-3">
-        <mat-label>Gender</mat-label>
-        <mat-select [(ngModel)]="gender">
-          <mat-option value="Male">Male</mat-option>
-          <mat-option value="Female">Female</mat-option>
-        </mat-select>
-      </mat-form-field>
-  
-      <mat-form-field class="col-5 col-md-5 m-1 m-md-3">
-        <mat-label>Age</mat-label>
-        <input type="number" matInput [(ngModel)]="age" placeholder="Ex: 25">
-      </mat-form-field>
-  
-      <h2 class="text-light mb-1">Select your daily activity level</h2>
-      <mat-radio-group [(ngModel)]="activity_level" class="col-12 mb-3" aria-label="Select an option">
-        <mat-radio-button value="1">Very Active</mat-radio-button>
-        <mat-radio-button value="2">Active</mat-radio-button>
-        <mat-radio-button value="3">Moderately Active</mat-radio-button>
-        <mat-radio-button value="4">Lightly Active</mat-radio-button>
-      </mat-radio-group>
-  
-      <div class="col-12 justify-content-end row my-3">
-
-      <button class="col-6" mat-raised-button color="accent" (click)="onButtonClick()">Calculate</button>
-    </div>
-
-    </div>
-    
+  <h1 class="text-center text-light p-3" style="font-size: 30px; font-weight: bold;">How many calories should I eat in a
+    day?</h1>
+  <div class="text-light" *ngIf="result != 0">
+    <h1 class="text-center"> To maintain your current weight, you must consume {{ result }} calories per day.</h1>
   </div>
+  <div class="">
+    <div class="example-container row text-center ms-auto me-auto justify-content-center">
+      <div class="col-10 col-md-8 col-xl-6 bg-secondary p-2 p-md-5 pt-4 rounded ">
+
+        <mat-form-field class="col-10 col-md-5 m-1 m-md-3">
+          <mat-label>Weight</mat-label>
+          <input name="weight" type="number" matInput [(ngModel)]="weight" placeholder="Ex: 75 kg">
+          <mat-hint class="text-center">Please enter your weight as kg</mat-hint>
+        </mat-form-field>
+
+        <mat-form-field class="col-10 col-md-5 m-1 m-md-3">
+          <mat-label>Height</mat-label>
+          <input type="number" matInput [(ngModel)]="height" placeholder="Ex: 175 cm">
+          <mat-hint class="text-center">Please enter your height as cm</mat-hint>
+        </mat-form-field>
+
+        <mat-form-field class="col-5 col-md-5 m-1 m-md-3">
+          <mat-label>Gender</mat-label>
+          <mat-select [(ngModel)]="gender">
+            <mat-option value="Male">Male</mat-option>
+            <mat-option value="Female">Female</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="col-5 col-md-5 m-1 m-md-3">
+          <mat-label>Age</mat-label>
+          <input type="number" matInput [(ngModel)]="age" placeholder="Ex: 25">
+        </mat-form-field>
+
+        <h2 class="text-light mb-1">Select your daily activity level</h2>
+        <mat-radio-group [(ngModel)]="activity_level" class="col-12 mb-3" aria-label="Select an option">
+          <mat-radio-button value="1">Very Active</mat-radio-button>
+          <mat-radio-button value="2">Active</mat-radio-button>
+          <mat-radio-button value="3">Moderately Active</mat-radio-button>
+          <mat-radio-button value="4">Lightly Active</mat-radio-button>
+        </mat-radio-group>
+
+        <div class="col-12 justify-content-end row my-3">
+
+          <button class="col-6" mat-raised-button color="accent" (click)="onButtonClick()">Calculate</button>
+        </div>
+
+      </div>
+
+    </div>
 
 
+  </div>
 </div>

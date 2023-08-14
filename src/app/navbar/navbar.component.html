@@ -1,5 +1,9 @@
-<div>
-
+<div class="position-relative">
+  <div class="position-absolute text-white translate-middle display-block" [ngClass]="">
+    <div class="bg-danger p-2 px-5 rounded">
+      <h3>You need to sign in to use this feature.</h3>
+    </div>
+  </div>
   <nav class="navbar navbar-expand-lg navbar-dark">
     <div class="container-fluid">
       <a href="https://kasimselimhanbaltas.github.io/#/" target="_blank" class="navbar-brand ms-5 pt-0">
@@ -13,7 +17,6 @@
         <ul class="navbar-nav text-center">
           <li id="navHome" class="nav-item">
             <a class="nav-link ${activeClassH} btn" routerLink="/">Home</a>
-            <!-- <a class="nav-link ${activeClassH} btn" (click)="customRoute('/landing-page')">Home</a> -->
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="/" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
@@ -22,18 +25,15 @@
             </a>
             <ul class="dropdown-menu text-white text-center" aria-labelledby="navbarDropdown">
               <li><a class="dropdown-item btn" routerLink="/daily-calories-need">Daily Needed Calories</a>
-                <!-- <li><a class="dropdown-item btn" (click)="customRoute('/daily-calories-need')">Daily Needed Calories</a> -->
                 </li>
               <li>
                 <hr class="dropdown-divider bg-light">
               </li>
               <li><a class="dropdown-item btn" routerLink="calories-intake">How Much I Ate</a></li>
-              <!-- <li><a class="dropdown-item btn" (click)="customRoute('/calories-intake')">How Much I Ate</a></li> -->
             </ul>
           </li>
 
           <li id="navGame" class="nav-item">
-            <!-- <a class="nav-link btn" (click)="customRoute('/foods')">Nutrients</a> -->
             <a class="nav-link btn" routerLink="/foods">Nutrients</a>
           </li>
         </ul>

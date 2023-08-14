@@ -15,3 +15,21 @@
 .dropdown-item:hover {
   color: black !important;
 }
+.bg-danger {
+  opacity: .7;
+}
+
+.warning {
+  top: 100%; left: 50%;
+  z-index: 99;
+  visibility: hidden;
+  animation: warning 4s;
+}
+@keyframes warning {
+  0% {
+    visibility: visible;
+  }
+  100% {
+    visibility: visible;
+  }
+}
