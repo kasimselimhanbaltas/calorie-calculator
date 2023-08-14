@@ -10,44 +10,47 @@
       </div>
       <div class="modal-body">
         <div class="">
-          <div class="example-container row text-center ms-auto me-auto bg-secondary p-4 rounded">
+          <div class="row text-center bg-secondary p-4 rounded justify-content-center">
 
-            <div class="col-4"></div>
-            <mat-form-field class="col-4 mb-3">
+            <div class="d-none d-lg-inline-flex col-1"></div>
+            <mat-form-field class="col-12 col-sm-6 col-lg-5">
               <mat-label>Food</mat-label>
               <input name="weight" matInput [(ngModel)]="food" placeholder="Ex: Bread, cracked wheat">
             </mat-form-field>
-            <div class="col-4"></div>
-            <mat-form-field class="col-2 mb-3">
+            <mat-form-field class="col-12 col-sm-6 col-lg-5">
+              <mat-label>Image URL</mat-label>
+              <input name="weight" matInput [(ngModel)]="imageURL" placeholder="Ex: 2">
+            </mat-form-field>
+            <div class="d-none d-lg-inline-flex col-1"></div>
+
+            <div class="col-0 col-lg"></div>
+            <mat-form-field class="col-12 col-sm-6 col-lg-2">
               <mat-label>Grams</mat-label>
               <input name="weight" matInput [(ngModel)]="grams" placeholder="Ex: 23">
             </mat-form-field>
-            <mat-form-field class="col-2 mb-3">
+            <mat-form-field class="col-12 col-sm-6 col-lg-2">
               <mat-label>Calories</mat-label>
               <input name="weight" matInput [(ngModel)]="calories" placeholder="Ex: 60">
             </mat-form-field>
-            <mat-form-field class="col-2 mb-3">
+            <mat-form-field class="col-12 col-sm-6 col-lg-2">
               <mat-label>Carbs</mat-label>
               <input name="weight" matInput [(ngModel)]="carbs" placeholder="Ex: 12">
               <mat-hint class="text-center">*grams</mat-hint>
             </mat-form-field>
-            <mat-form-field class="col-2 mb-3">
+            <mat-form-field class="col-12 col-sm-6 col-lg-2">
               <mat-label>Fat</mat-label>
               <input name="weight" matInput [(ngModel)]="fat" placeholder="Ex: 1">
               <mat-hint class="text-center">*grams</mat-hint>
             </mat-form-field>
-            <mat-form-field class="col-2 mb-3">
+            <mat-form-field class="col-12 col-sm-6 col-lg-2">
               <mat-label>Protein</mat-label>
               <input name="weight" matInput [(ngModel)]="protein" placeholder="Ex: 2">
               <mat-hint class="text-center">*grams</mat-hint>
             </mat-form-field>
-            <mat-form-field class="col-2 mb-3">
-              <mat-label>Image URL</mat-label>
-              <input name="weight" matInput [(ngModel)]="imageURL" placeholder="Ex: 2">
-            </mat-form-field>
+            <div class="col-0 col-lg"></div>
 
-            <h1 class="text-center">Category</h1>
-            <mat-radio-group [(ngModel)]="category" class="col-12 mb-3" aria-label="Select an option">
+            <h1 class="text-center ">Category</h1>
+            <mat-radio-group [(ngModel)]="category" class="col-12 mb-3 categories rounded" aria-label="Select an option">
               <mat-radio-button *ngFor="let cat of baseCategories" [value]="cat">{{cat}}</mat-radio-button>
             </mat-radio-group>
 

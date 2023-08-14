@@ -37,7 +37,6 @@ export class FoodsViewComponent implements OnInit, DoCheck {
   screenWidth: number = window.innerWidth;
   drawerMode: any = "side"
 
-  categoryClass: string = "bg-dark";
   showCategories = false;
 
   @ViewChild('drawer') myDrawer!: MatDrawer;
@@ -65,13 +64,15 @@ export class FoodsViewComponent implements OnInit, DoCheck {
   toggleCategories() {
     if (!this.showCategories) {
       this.showCategories = true;
+      this.decoration1Class = ""
     } else {
       this.showCategories = false;
+      this.decoration1Class = "border-0"
     }
     
   }
 
-  showFiller = false;
+  decoration1Class = "border-0";
 
   private userSub: Subscription;
   isAuthenticated = false;

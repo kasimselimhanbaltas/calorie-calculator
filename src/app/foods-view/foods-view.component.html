@@ -25,37 +25,33 @@
       </div>
     </div>
   </mat-drawer>
+  <div class="decoration-1" [ngClass]="decoration1Class"></div>
 
   <div class="row m-0 p-0 text-light position-relative">
 
     <button *ngIf="showCategories" class="show-categories-button fade-in" (click)="drawer.toggle(); toggleCategories()">
       <h1 class="text-center m-0 mt-2" style="min-width: 200px;">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-          class="bi bi-arrow-right-circle me-2" viewBox="0 0 16 16">
-          <path fill-rule="evenodd"
-            d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z" />
-        </svg>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-list"
+        viewBox="0 0 16 16">
+        <path fill-rule="evenodd"
+          d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" />
+      </svg>
         Categories
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-          class="bi bi-arrow-right-circle ms-2" viewBox="0 0 16 16">
-          <path fill-rule="evenodd"
-            d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z" />
-        </svg>
       </h1>
     </button>
     <mat-divider></mat-divider>
 
-    <div class="col-12  ms-auto me-auto">
+    <div class="col-12 ms-auto me-auto">
       <div class="container text-light">
         <div class="food-container row">
           <!-- <div class="col-8">
             PAGINATOR 
           </div> -->
           <div class="col-12 mt-5 mt-md-0 pe-4">
-            <div class="d-flex justify-content-end">
+            <div class="d-flex justify-content-end mt-2">
               <div class="me-2">
-                <input class="form-control mx-auto searchBar" type="search" placeholder="Search" aria-label="Search" name="input"
-                  [(ngModel)]="searchValue" (ngModelChange)="updatePFList()">
+                <input class="form-control mx-auto searchBar" type="search" placeholder="Search" aria-label="Search"
+                  name="input" [(ngModel)]="searchValue" (ngModelChange)="updatePFList()">
               </div>
               <div class="text-center">
                 <button *ngIf="isAuthenticated" data-bs-toggle="modal" data-bs-target="#detailsModal"
@@ -78,8 +74,11 @@
                 <img [src]="item.imageURL" alt="">
               </div>
               <p class="text-center mt-2">{{ item.Food }}</p>
-              <mat-divider class="mt-2"></mat-divider>
-              <p class="mt-2">{{ item.Category }}</p>
+              <mat-divider class="mt-1"></mat-divider>
+              <div class="categoryInfoContainer">
+                <p class="mt-1 position-absolute">{{ item.Category }}</p>
+              </div>
+
               <div class="card-bottom">
                 <div class="my-divider"></div>
                 <p class="">{{ (item.Calories / item.Grams).toFixed(2) }} Cal/g</p>
@@ -94,10 +93,10 @@
 
   </div>
   <div class="col-12 text-center">
-    <mat-paginator class="bg-transparent" #paginator (page)="handlePageEvent($event)" [length]="filteredFV.length"
-      [pageSize]="pageSize" [disabled]="disabled" [showFirstLastButtons]="showFirstLastButtons"
-      [pageSizeOptions]="showPageSizeOptions ? pageSizeOptions : []" [hidePageSize]="hidePageSize"
-      [pageIndex]="pageIndex" aria-label="Select page">
+    <mat-paginator class="bg-transparent text-center ms-auto me-auto" #paginator (page)="handlePageEvent($event)"
+      [length]="filteredFV.length" [pageSize]="pageSize" [disabled]="disabled"
+      [showFirstLastButtons]="showFirstLastButtons" [pageSizeOptions]="showPageSizeOptions ? pageSizeOptions : []"
+      [hidePageSize]="hidePageSize" [pageIndex]="pageIndex" aria-label="Select page">
     </mat-paginator>
   </div>
 

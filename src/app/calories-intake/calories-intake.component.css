@@ -1,39 +1,62 @@
-/* .fixed-content {
-  top: 0;
-  bottom:0;
-  position:fixed;
-  overflow-y:hidden;
-  overflow-x:hidden;
-} */
+.decoration-1 {
+  content: '';
+  position: absolute;
+  left:0; top: 0;
+  display: inline-block;
+  border-top: 80px solid #121629;
+  border-right: 400px solid transparent;
+  transition: border .4s;
+}
+
+.decoration-2 {
+  content: '';
+  position: absolute;
+  right:0; top: 0;
+  display: inline-block;
+  border-top: 80px solid #121629;
+  border-left: 400px solid transparent;
+  transition: border .4s;
+}
+
+
 
 .selectedNutrientsContainer {
-  border: 3px white solid;
-  width: 90%;
+  width: 300px;
 }
+
 .savedNutrient {
   position: relative;
   background-color: #121629;
   height: 110px;
 }
+
 .savedNutrient .imgcontainer {
   position: absolute;
-  top:0;
-  left:0;
+  top: 0;
+  left: 0;
   height: 50px;
   width: 100%;
   overflow: hidden;
   text-align: center;
-  overflow: hidden; /* Resim container dışına taşarsa kes */
-  position: absolute; /* Resim container içinde pozisyonlanmayı sağlar */
+  overflow: hidden;
+  /* Resim container dışına taşarsa kes */
+  position: absolute;
+  /* Resim container içinde pozisyonlanmayı sağlar */
 }
+
 .savedNutrient img {
-  width: 100%; /* Resmi container genişliğine göre ölçekle */
-  height: 100%; /* Resmi container yüksekliğine göre ölçekle */
-  object-fit: cover; /* Resmi orijinal aspect-ratio'sunu koruyarak container'a sığdır */
-  object-position: center; /* Resmi container ortasında konumlandır */
+  width: 100%;
+  /* Resmi container genişliğine göre ölçekle */
+  height: 100%;
+  /* Resmi container yüksekliğine göre ölçekle */
+  object-fit: cover;
+  /* Resmi orijinal aspect-ratio'sunu koruyarak container'a sığdır */
+  object-position: center;
+  /* Resmi container ortasında konumlandır */
 
 }
-.savedNutrient p{
+
+.savedNutrient p {
   font-size: 13px;
   line-height: 13px;
   padding: 0;
@@ -44,6 +67,7 @@
   left: 50%;
   transform: translateX(-50%) translateY(-50%);
 }
+
 .deleteSavedNutrientButton {
   border: none;
   border-radius: 50%;
@@ -54,13 +78,15 @@
   background-color: red;
   padding: 12px;
 }
+
 .closeIcon {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translateX(-50%) translateY(-50%);
 }
-.result h3{
+
+.result h3 {
   text-align: end;
   margin: 0;
 }
@@ -68,9 +94,11 @@
 .categories {
   background-color: #121629 !important;
 }
+
 .categories p {
   font-size: 12px !important;
 }
+
 mat-checkbox {
   height: 35px;
 }
@@ -86,9 +114,11 @@ mat-checkbox {
   cursor: pointer;
   transition: all .2s;
 }
+
 .card:hover {
   scale: 1.1;
 }
+
 .image-container {
   height: 125px;
   align-items: center;
@@ -96,18 +126,21 @@ mat-checkbox {
   overflow: hidden;
   position: relative;
 }
-.card img{
+
+.card img {
   position: absolute;
   left: 50%;
   top: 50%;
   transform: translateY(-50%) translateX(-50%);
   width: 100%;
 }
+
 p {
   margin: 0 5px;
   line-height: 18px;
   font-size: 15px;
 }
+
 .my-divider {
   display: block;
   margin: 5px 0;
@@ -119,9 +152,219 @@ p {
   padding: 1px;
   content: '';
 }
+
 .card-bottom {
   position: absolute;
   bottom: 5%;
   left: 50%;
   transform: translateX(-50%);
+}
+
+.show-categories-button {
+  z-index: 999;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 150px;
+  background-color: transparent;
+  color: white;
+  outline: none;
+  border: none;
+  user-select: none;
+}
+
+.show-selected-nutirents-button {
+  z-index: 999;
+  position: absolute;
+  top: 0;
+  left: 100%;
+  transform: translateX(-100%);
+  width: 140px;
+  background-color: transparent;
+  color: white;
+  outline: none;
+  border: none;
+  user-select: none;
+}
+
+.bi-list {
+  width: 24px;
+  height: 24px;
+}
+
+.show-categories-button,
+.show-selected-nutirents-button {
+  z-index: 999 !important;
+  color: white;
+  background-color: #121629;
+  padding: 3px;
+  margin: 0;
+}
+
+.show-categories-button:hover,
+.show-selected-nutirents-button:hover {
+  background-color: #1216297a;
+}
+
+.categoriesHeader {
+  cursor: pointer;
+  user-select: none;
+}
+
+.categories {
+  background-color: #121629 !important;
+}
+
+.categories p {
+  font-size: 12px !important;
+  width: 100% !important;
+}
+
+mat-checkbox {
+  height: 35px;
+}
+
+.my-divider {
+  margin: 15px auto;
+  height: 3px;
+  width: 200px;
+  background-color: white !important;
+  padding: 1px;
+  content: '';
+  margin-bottom: 10px;
+}
+
+mat-drawer {
+  background-color: #121629 !important;
+}
+
+.card {
+  width: 225px;
+  height: 250px;
+  text-align: center;
+  border: 0px;
+  background-color: #121629;
+  color: white;
+  border-radius: 0;
+  cursor: pointer;
+  transition: all .2s;
+}
+
+.card:hover {
+  scale: 1.1;
+}
+
+.image-container {
+  height: 125px;
+  align-items: center;
+  align-content: center;
+  overflow: hidden;
+  position: relative;
+}
+
+.card img {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translateY(-50%) translateX(-50%);
+  width: 100%;
+}
+
+.categoryInfoContainer {
+  position: relative;
+  height: 40px;
+}
+
+.categoryInfoContainer p {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateY(-50%) translateX(-50%);
+
+}
+
+p {
+  margin: 0 5px;
+  line-height: 18px;
+  font-size: 15px;
+  width: 100% !important;
+}
+
+.card-bottom {
+  position: absolute;
+  bottom: 5%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.searchBar {
+  width: 200px;
+}
+
+mat-paginator {
+  display: flex;
+  justify-content: center !important;
+}
+
+.badge {
+  width: 22px;
+  height: 18px;
+  font-size: 10px;
+  top: 5%;
+  left: 130%;
+
+}
+
+
+@media screen and (max-width: 1200px) {
+  .card {
+    width: 150px;
+    height: 200px;
+    font-size: 10px !important;
+  }
+
+  .image-container {
+    height: 80px;
+  }
+
+  p {
+    margin: 0 2px;
+    line-height: 15px;
+    font-size: 12px !important;
+  }
+
+  .my-divider {
+    margin: 30px auto;
+    height: 3px;
+    width: 80px;
+    background-color: white !important;
+    padding: 0px !important;
+    padding-top: 1px;
+    content: '';
+    margin-bottom: 5px;
+  }
+
+  .mat-drawer {
+    position: absolute !important;
+  }
+
+}
+
+@media screen and (max-width: 600px) {
+
+  .show-selected-nutirents-button,
+  .show-categories-button {
+    min-width: 100px !important;
+    font-size: 15px !important;
+  }
+
+  .searchBar {
+    width: 135px;
+
+  }
+
+  .bi-list {
+    width: 16px;
+    height: 16px;
+  }
 }

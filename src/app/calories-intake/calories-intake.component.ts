@@ -1,4 +1,4 @@
-import { Component, OnInit, DoCheck } from '@angular/core';
+import { Component, OnInit, DoCheck, ViewChild, HostListener } from '@angular/core';
 
 import { inject } from '@angular/core';
 import { Firestore } from '@angular/fire/firestore';
@@ -14,6 +14,7 @@ import { NgOptimizedImage } from '@angular/common'
 import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
+import {MatDrawer, MatSidenavModule} from '@angular/material/sidenav';
 
 export interface intakeNutrient {
   Food: string,
@@ -27,7 +28,7 @@ export interface intakeNutrient {
   templateUrl: './calories-intake.component.html',
   styleUrls: ['./calories-intake.component.css'],
   standalone: true,
-  imports: [MatCheckboxModule, CommonModule, FormsModule, MatDividerModule, EditNutrientComponent, AddNutrientComponent, NgOptimizedImage, MatPaginatorModule]
+  imports: [MatCheckboxModule, CommonModule, FormsModule, MatDividerModule, EditNutrientComponent, AddNutrientComponent, NgOptimizedImage, MatPaginatorModule, MatPaginatorModule, MatSidenavModule]
 })
 export class CaloriesIntakeComponent implements OnInit, DoCheck {
 
@@ -36,7 +37,68 @@ export class CaloriesIntakeComponent implements OnInit, DoCheck {
   filteredFV: food[] = [];
   foodsPF: food[] = []; // paginated and filtered
 
+  screenWidth: number = window.innerWidth;
+  drawerMode: any = "side"
+  showCategories = false;
+  showNutrients = false;
+  decoration1Class = "border-0";
+  decoration2Class = "border-0";
+
+  @ViewChild('drawer') myDrawer!: MatDrawer;
+  @ViewChild('drawer2') myDrawer2!: MatDrawer;
+  @ViewChild('mainDiv') mainDiv!: HTMLElement;
+  @ViewChild('decoration1') decoration1!: HTMLElement;
+  @ViewChild('decoration2') decoration2!: HTMLElement;
+  lastScreenSize: number = 0;
   intakeNutrients: intakeNutrient[] = [];
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    if (this.mainDiv.offsetWidth < 1000) {
+      console.log("aaaa")
+    }
+    this.screenWidth = window.innerWidth;
+    if (this.screenWidth < 1200) {
+      if(this.lastScreenSize == 0 || this.lastScreenSize >= 1200){
+        this.drawerMode = 'over';
+        this.myDrawer.close()
+        this.showCategories = true;
+        this.myDrawer2.close()
+        this.showNutrients = true;
+        this.decoration1Class = "";
+        this.decoration2Class = "";
+        this.lastScreenSize = this.screenWidth;
+      }
+    } 
+    if (this.screenWidth >= 1200) {
+      this.drawerMode = 'side';
+      this.lastScreenSize = this.screenWidth;
+
+    }
+    // Burada ekran genişliği değiştiğinde yapmak istediğiniz işlemleri gerçekleştirebilirsiniz.
+  }
+  toggleCategories() {
+    if (!this.showCategories) {
+      console.log("toggling")
+      this.showCategories = true;
+      this.decoration1Class = "";
+      } else {
+      this.showCategories = false;
+      this.decoration1Class = "border-0";
+
+    }
+  }
+
+  toggleSelectedNutrients() {
+    if (!this.showNutrients) {
+      this.showNutrients = true;
+      this.decoration2Class = "";
+    } else {
+      this.showNutrients = false;
+      this.decoration2Class = "border-0";
+    }
+  }
+  
 
   selectedCategories: { [category: string]: boolean } = {};
   baseCategories: Array<string> = [
@@ -116,11 +178,9 @@ export class CaloriesIntakeComponent implements OnInit, DoCheck {
     // Pagination
     this.foodsPF = []
     for (let i = this.pageIndex*this.pageSize; i < (this.pageIndex+1)*this.pageSize; i++) {
-      console.log(i)
-      this.foodsPF.push(this.filteredFV[i]);
+      if(this.filteredFV[i] == undefined) continue
+      this.foodsPF.push(this.filteredFV[i]);        
     }
-    console.log("aanan", this.foodsPF);
-    console.log("aanan", this.filteredFV.length);
 
     // if(this.foodsPF.length < this.pageSize) this.pageEvent.pageIndex = 0;
   }
@@ -153,6 +213,15 @@ export class CaloriesIntakeComponent implements OnInit, DoCheck {
     (await this.sharedService.getIntakeNutrients()).subscribe(intakeNutrients => {
       this.intakeNutrients = intakeNutrients;
     });
+    if(window.innerWidth < 1200){
+      this.drawerMode = 'over';
+      this.myDrawer.close()
+      this.myDrawer2.close()
+      this.showCategories = true;
+      this.showNutrients = true;
+      this.decoration1Class = "";
+      this.decoration2Class = "";
+    }
     
   }
   firestore: Firestore = inject(Firestore);

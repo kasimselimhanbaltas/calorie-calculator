@@ -34,9 +34,9 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    NavbarComponent,
   ],
   imports: [
+    NavbarComponent,
     LandingPageComponent,
     LoadingSpinnerComponent,
     AuthComponent,
