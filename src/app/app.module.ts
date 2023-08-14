@@ -25,7 +25,7 @@ import { AuthComponent } from './auth/auth.component';
 import { AuthGuard } from './auth/auth.guard';
 
 const routes: Routes = [
-  { path: '', component: LandingPageComponent },
+  { path: 'landing-page', component: LandingPageComponent },
   { path: 'daily-calories-need', component: CalculatorComponent }, 
   { path: 'calories-intake', component: CaloriesIntakeComponent, canActivate: [AuthGuard] },
   { path: 'foods', component: FoodsViewComponent },

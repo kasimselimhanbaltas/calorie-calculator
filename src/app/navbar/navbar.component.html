@@ -12,24 +12,24 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav text-center">
           <li id="navHome" class="nav-item">
-            <a class="nav-link ${activeClassH}" href="/">Home</a>
+            <a class="nav-link ${activeClassH}" routerLink="/landing-page">Home</a>
           </li>
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+            <a class="nav-link dropdown-toggle" href="/" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
               aria-expanded="false">
               Calculator
             </a>
             <ul class="dropdown-menu text-white text-center" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="/daily-calories-need">Daily Needed Calories</a></li>
+              <li><a class="dropdown-item" routerLink="/daily-calories-need">Daily Needed Calories</a></li>
               <li>
                 <hr class="dropdown-divider bg-light">
               </li>
-              <li><a class="dropdown-item" href="/calories-intake">How Much I Ate</a></li>
+              <li><a class="dropdown-item"  routerLink="/calories-intake">How Much I Ate</a></li>
             </ul>
           </li>
 
           <li id="navGame" class="nav-item">
-            <a class="nav-link" href="/foods">Nutrients</a>
+            <a class="nav-link" routerLink="/foods">Nutrients</a>
           </li>
         </ul>
         <!-- Contacts -->
