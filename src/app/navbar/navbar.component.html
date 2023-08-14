@@ -53,10 +53,10 @@
                 src="assets/github.png" alt=""></a>
           </li>-->
           <li *ngIf="isAuthenticated" class="nav-item text-center">
-            <a class="nav-link" href="/login-register" (click)="logOut()">Logout</a>
+            <a class="nav-link" routerLink="/login-register" (click)="logOut()">Logout</a>
           </li>
           <li *ngIf="!isAuthenticated" class="nav-item text-center">
-            <a class="nav-link" href="/login-register">
+            <a class="nav-link" routerLink="/login-register">
               Sign in/Sign up
             </a>
           </li>
