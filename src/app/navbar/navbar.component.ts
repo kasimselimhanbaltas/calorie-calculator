@@ -3,7 +3,7 @@ import { AuthService } from '../auth/auth.service';
 import { Subscription } from 'rxjs';
 import { MatDividerModule } from '@angular/material/divider';
 import { CommonModule } from '@angular/common';
-import { Routes, RouterModule } from '@angular/router'; // CLI imports router
+import { Routes, RouterModule, Router } from '@angular/router'; // CLI imports router
 
 @Component({
   selector: 'app-navbar',
@@ -17,8 +17,11 @@ export class NavbarComponent implements OnInit, OnDestroy {
   isAuthenticated = false;
   private userSub: Subscription;
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
+  customRoute(path: string) {
+    this.router.navigate([path]);
+  }
   ngOnInit(): void {
     this.userSub = this.authService.user.subscribe(user => {
       this.isAuthenticated = !!user;
