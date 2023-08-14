@@ -24,12 +24,19 @@ import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.compo
 import { AuthComponent } from './auth/auth.component';
 import { AuthGuard } from './auth/auth.guard';
 
+// const routes: Routes = [
+//   { path: 'landing-page', component: LandingPageComponent },
+//   { path: 'daily-calories-need', component: CalculatorComponent }, 
+//   { path: 'calories-intake', component: CaloriesIntakeComponent, canActivate: [AuthGuard] },
+//   { path: 'foods', component: FoodsViewComponent },
+//   { path: 'login-register', component: AuthComponent },
+// ];
 const routes: Routes = [
-  { path: 'landing-page', component: LandingPageComponent },
-  { path: 'daily-calories-need', component: CalculatorComponent }, 
-  { path: 'calories-intake', component: CaloriesIntakeComponent, canActivate: [AuthGuard] },
-  { path: 'foods', component: FoodsViewComponent },
-  { path: 'login-register', component: AuthComponent },
+  { path: 'calorie-calculator/landing-page', component: LandingPageComponent },
+  { path: 'calorie-calculator/daily-calories-need', component: CalculatorComponent }, 
+  { path: 'calorie-calculator/calories-intake', component: CaloriesIntakeComponent, canActivate: [AuthGuard] },
+  { path: 'calorie-calculator/foods', component: FoodsViewComponent },
+  { path: 'calorie-calculator/login-register', component: AuthComponent },
 ];
 @NgModule({
   declarations: [
