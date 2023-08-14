@@ -12,7 +12,7 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav text-center">
           <li id="navHome" class="nav-item">
-            <a class="nav-link ${activeClassH} btn" (click)="customRoute('/calorie-calculator/landing-page')">Home</a>
+            <a class="nav-link ${activeClassH} btn" routerLink="/">Home</a>
             <!-- <a class="nav-link ${activeClassH} btn" (click)="customRoute('/landing-page')">Home</a> -->
           </li>
           <li class="nav-item dropdown">
@@ -21,20 +21,20 @@
               Calculator
             </a>
             <ul class="dropdown-menu text-white text-center" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item btn" (click)="customRoute('/calorie-calculator/daily-calories-need')">Daily Needed Calories</a>
+              <li><a class="dropdown-item btn" routerLink="/daily-calories-need">Daily Needed Calories</a>
                 <!-- <li><a class="dropdown-item btn" (click)="customRoute('/daily-calories-need')">Daily Needed Calories</a> -->
                 </li>
               <li>
                 <hr class="dropdown-divider bg-light">
               </li>
-              <li><a class="dropdown-item btn" (click)="customRoute('/calorie-calculator/calories-intake')">How Much I Ate</a></li>
+              <li><a class="dropdown-item btn" routerLink="calories-intake">How Much I Ate</a></li>
               <!-- <li><a class="dropdown-item btn" (click)="customRoute('/calories-intake')">How Much I Ate</a></li> -->
             </ul>
           </li>
 
           <li id="navGame" class="nav-item">
             <!-- <a class="nav-link btn" (click)="customRoute('/foods')">Nutrients</a> -->
-            <a class="nav-link btn" (click)="customRoute('/calorie-calculator/foods')">Nutrients</a>
+            <a class="nav-link btn" routerLink="/foods">Nutrients</a>
           </li>
         </ul>
         <!-- Contacts -->

@@ -32,7 +32,7 @@ import { AuthGuard } from './auth/auth.guard';
 //   { path: 'login-register', component: AuthComponent },
 // ];
 const routes: Routes = [
-  { path: 'landing-page', component: LandingPageComponent },
+  { path: '', component: LandingPageComponent },
   { path: 'daily-calories-need', component: CalculatorComponent }, 
   { path: 'calories-intake', component: CaloriesIntakeComponent, canActivate: [AuthGuard] },
   { path: 'foods', component: FoodsViewComponent },
