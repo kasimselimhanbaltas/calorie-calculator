@@ -26,7 +26,7 @@
   user-select: none;
 }
 .categories {
-  background-color: #121629 !important;
+  background-color: #121629 ;
 }
 .categories p {
   font-size: 12px !important;
@@ -47,7 +47,7 @@ mat-checkbox {
 }
 
 mat-drawer {
-  background-color: #121629 !important;
+  background-color: #121629 ;
 }
 
 .card {

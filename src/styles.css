@@ -56,5 +56,12 @@ input::-webkit-inner-spin-button {
 }
 .light-p {
   color: #abd1c6 !important;
+  fill:  black !important;
 }
-
+.light-p2 {
+  color: black !important;
+  fill:  #abd1c6 !important;
+}
+.light-decoration {
+  border-top-color: #004643 !important;
+}

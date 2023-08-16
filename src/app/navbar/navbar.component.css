@@ -1,19 +1,19 @@
 
 .navbar {
-  background-color: #121629 !important;
+  background-color: #121629;
 }
 
 .nav-item img {
   height: 4vh;
 }
 .dropdown-menu {
-  background-color: #121629 !important;
+  background-color: #121629 ;
 }
 .dropdown-item {
-  color: white !important;
+  color: white;
 }
 .dropdown-item:hover {
-  color: black !important;
+  color: black;
 }
 
 .warning {

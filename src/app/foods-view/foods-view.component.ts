@@ -1,5 +1,5 @@
 import { Component, OnInit, DoCheck, HostListener, ViewChild } from '@angular/core';
-import {MatPaginatorModule, PageEvent} from '@angular/material/paginator';
+import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 
 import { inject } from '@angular/core';
 import { Firestore } from '@angular/fire/firestore';
@@ -12,7 +12,7 @@ import { EditNutrientComponent } from '../edit-nutrient/edit-nutrient.component'
 import { AddNutrientComponent } from '../add-nutrient/add-nutrient.component';
 import { Subscription, last } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
-import {MatDrawer, MatSidenavModule} from '@angular/material/sidenav';
+import { MatDrawer, MatSidenavModule } from '@angular/material/sidenav';
 
 export interface food {
   Food: string,
@@ -41,18 +41,18 @@ export class FoodsViewComponent implements OnInit, DoCheck {
 
   @ViewChild('drawer') myDrawer!: MatDrawer;
   lastScreenSize: number = 0;
-  
+
   @HostListener('window:resize', ['$event'])
   onResize(event: any) {
     this.screenWidth = window.innerWidth;
     if (this.screenWidth < 1200) {
-      if(this.lastScreenSize == 0 || this.lastScreenSize >= 1200){
+      if (this.lastScreenSize == 0 || this.lastScreenSize >= 1200) {
         this.drawerMode = 'over';
         this.myDrawer.close()
         this.showCategories = true;
         this.lastScreenSize = this.screenWidth;
       }
-    } 
+    }
     if (this.screenWidth >= 1200) {
       this.drawerMode = 'side';
       this.lastScreenSize = this.screenWidth;
@@ -63,13 +63,12 @@ export class FoodsViewComponent implements OnInit, DoCheck {
 
   toggleCategories() {
     if (!this.showCategories) {
-      this.showCategories = true;
       this.decoration1Class = ""
+      this.showCategories = true;
     } else {
-      this.showCategories = false;
       this.decoration1Class = "border-0"
+      this.showCategories = false;
     }
-    
   }
 
   decoration1Class = "border-0";
@@ -131,16 +130,16 @@ export class FoodsViewComponent implements OnInit, DoCheck {
 
   }
 
-    /**
-   * fetchedlist
-   * foodsviewing 
-   *      sort by category and input
-   * filteredFV
-   *      pagination
-   * P + F
-   * 
-   * 
-   */
+  /**
+ * fetchedlist
+ * foodsviewing 
+ *      sort by category and input
+ * filteredFV
+ *      pagination
+ * P + F
+ * 
+ * 
+ */
   updatePFList() {
     // Copy original list
     this.foodsViewing = this.fetchedFoods;
@@ -148,18 +147,18 @@ export class FoodsViewComponent implements OnInit, DoCheck {
     this.foodsViewing = [];
     let checkCheck = true;
     for (const category in this.selectedCategories) {// Check if no categories selected
-      if (this.selectedCategories[category]){ 
+      if (this.selectedCategories[category]) {
         checkCheck = false; // At least 1 category selected
       }
     }
-    if(checkCheck){ // show all categories
+    if (checkCheck) { // show all categories
       this.foodsViewing = this.fetchedFoods;
     } else {
       for (const category in this.selectedCategories) {
         if (this.selectedCategories[category]) {
           // Filter the fetchedFoods list based on the selected category
           const filteredItems = this.fetchedFoods.filter((foodItem) => foodItem.Category === category);
-  
+
           // Concatenate the filtered items to the existing list
           this.foodsViewing = this.foodsViewing.concat(filteredItems);
         }
@@ -171,13 +170,13 @@ export class FoodsViewComponent implements OnInit, DoCheck {
 
     // Pagination
     this.foodsPF = []
-    for (let i = this.pageIndex*this.pageSize; i < (this.pageIndex+1)*this.pageSize; i++) {
+    for (let i = this.pageIndex * this.pageSize; i < (this.pageIndex + 1) * this.pageSize; i++) {
       this.foodsPF.push(this.filteredFV[i]);
     }
 
     // if(this.foodsPF.length < this.pageSize) this.pageEvent.pageIndex = 0;
   }
-  
+
   ngDoCheck(): void {
     this.updatePFList()
   }
@@ -190,7 +189,7 @@ export class FoodsViewComponent implements OnInit, DoCheck {
       this.fetchedFoods = foods;
       this.updatePFList();
     });
-    if(window.innerWidth < 1200){
+    if (window.innerWidth < 1200) {
       this.drawerMode = 'over';
       this.myDrawer.close()
       this.showCategories = true;
@@ -204,7 +203,7 @@ export class FoodsViewComponent implements OnInit, DoCheck {
 
   searchValue: string = '';
 
-  selectFood(item: food, index: number){
+  selectFood(item: food, index: number) {
     this.sharedService.setSelectedFood(item);
     this.sharedService.setSelectedIndex(index);
   }

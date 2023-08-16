@@ -43,11 +43,20 @@ export class NavbarComponent implements OnInit, OnDestroy {
       }, 3000);
     }
   }
-  constructor(private authService: AuthService, private router: Router, private sharedService: SharedService) { }
+
+  theme = "";
+  subscription: Subscription;
+
+  constructor(private authService: AuthService, private router: Router, private sharedService: SharedService) { 
+    this.subscription = this.sharedService.getGlobalTheme().subscribe(value => {
+      this.theme = value;
+    });
+  }
 
   themeToggle = true;
   
   updateTheme() {
+    this.themeToggle = !this.themeToggle;
     if(this.themeToggle)
       this.sharedService.setGlobalTheme("dark");
     else

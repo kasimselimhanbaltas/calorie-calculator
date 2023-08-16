@@ -1,8 +1,8 @@
 <mat-drawer-container class="example-container position-relative fade-in" autosize style="height: 92vh;">
   <mat-drawer #drawer class="example-sidenav" [mode]="drawerMode" opened [ngClass]="(theme == 'dark') ? '' : 'light-card'">
-    <div class="categories col-2 p-3 pt-1 w-100">
+    <div class="categories col-2 p-3 pt-1 w-100" [ngClass]="(theme == 'dark') ? '' : 'light-card'">
       <h1 class="text-center m-0 mt-2 w-100 categoriesHeader" style="min-width: 200px;"
-        (click)="drawer.toggle(); toggleCategories()">
+        (click)="drawer.toggle(); toggleCategories();">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
           class="bi bi-arrow-right-circle me-3" viewBox="0 0 16 16" style="transform: rotate(180deg);">
           <path fill-rule="evenodd"
@@ -19,13 +19,13 @@
         <div class="w-100">
           <mat-checkbox (click)="updatePFList()" class="example-margin w-100"
             [(ngModel)]="selectedCategories[category]">
-            <p class="m-0" style="min-width: 200px;">{{ category }}</p>
+            <p class="m-0" style="min-width: 200px;" [ngClass]="(theme == 'dark') ? '' : 'light-card'">{{ category }}</p>
           </mat-checkbox>
         </div>
       </div>
     </div>
   </mat-drawer>
-  <div class="decoration-1" [ngClass]="decoration1Class"></div>
+  <div class="decoration-1" [ngClass]="[true ? decoration1Class : '', (theme == 'dark') ? '' : 'light-decoration']"></div>
 
   <div class="row m-0 p-0 text-light position-relative">
 
@@ -96,7 +96,9 @@
     <mat-paginator class="bg-transparent text-center ms-auto me-auto" #paginator (page)="handlePageEvent($event)"
       [length]="filteredFV.length" [pageSize]="pageSize" [disabled]="disabled"
       [showFirstLastButtons]="showFirstLastButtons" [pageSizeOptions]="showPageSizeOptions ? pageSizeOptions : []"
-      [hidePageSize]="hidePageSize" [pageIndex]="pageIndex" aria-label="Select page">
+      [hidePageSize]="hidePageSize" [pageIndex]="pageIndex" aria-label="Select page"
+      [ngClass]="(theme == 'dark') ? '' : 'light-card'">
+
     </mat-paginator>
   </div>
 
