@@ -11,15 +11,15 @@ import { CommonModule } from '@angular/common';
 import { MatRadioModule } from '@angular/material/radio';
 import { AuthResponseData, AuthService } from './auth.service';
 import { LoadingSpinnerComponent } from '../loading-spinner/loading-spinner.component';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { Router } from '@angular/router';
+import { SharedService } from 'src/services/sharedService';
 @Component({
   selector: 'app-auth-component',
   templateUrl: './auth.component.html',
   styleUrls: ['./auth.component.css'],
   standalone: true,
-  imports: [MatFormFieldModule, MatInputModule, MatSelectModule, MatButtonModule,
-    MatDividerModule, MatIconModule, MatInputModule, FormsModule, CommonModule, MatRadioModule, LoadingSpinnerComponent]
+  imports: [MatFormFieldModule, MatInputModule, MatSelectModule, MatButtonModule, MatDividerModule, MatIconModule, MatInputModule, FormsModule, CommonModule, MatRadioModule, LoadingSpinnerComponent]
 })
 export class AuthComponent {
 
@@ -27,11 +27,23 @@ export class AuthComponent {
   email: string;
   password: string;
 
+
   isLoginMode = true;
   isLoading = false;
   error: string = null;
 
-  constructor(private authService: AuthService, private router:Router) { }
+  inputValue = '';
+  sharedValue = '';
+
+  theme = "";
+  subscription: Subscription;
+
+  constructor(private authService: AuthService, private router: Router, private sharedService: SharedService) {
+    this.subscription = this.sharedService.getGlobalTheme().subscribe(value => {
+      this.theme = value;
+    });
+   }  
+
   switchLoginMode() {
     this.isLoginMode = !this.isLoginMode;
   }

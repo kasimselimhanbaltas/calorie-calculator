@@ -113,7 +113,14 @@ export class FoodsViewComponent implements OnInit, DoCheck {
     "Soups"
   ]
 
-  constructor(private sharedService: SharedService, private authService: AuthService) {}
+  theme = "";
+  subscription: Subscription;
+
+  constructor(private sharedService: SharedService, private authService: AuthService) {
+    this.subscription = this.sharedService.getGlobalTheme().subscribe(value => {
+      this.theme = value;
+    });
+  }
 
   handlePageEvent(e: PageEvent) {
     this.pageEvent = e;

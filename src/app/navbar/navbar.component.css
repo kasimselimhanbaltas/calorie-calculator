@@ -38,3 +38,11 @@
     opacity: 0;
   }
 }
+/* app.component.css */
+.mat-slide-toggle:not(.mat-checked) .mat-slide-toggle-thumb {
+  background-color: white !important; /* Kapalıyken beyaz yap */
+}
+
+.mat-slide-toggle.mat-checked .mat-slide-toggle-thumb {
+  background-color: black !important; /* Açıkken siyah yap */
+}

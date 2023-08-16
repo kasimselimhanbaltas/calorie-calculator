@@ -1,5 +1,5 @@
 <mat-drawer-container class="example-container position-relative fade-in" autosize style="height: 92vh;">
-  <mat-drawer #drawer class="example-sidenav" [mode]="drawerMode" opened>
+  <mat-drawer #drawer class="example-sidenav" [mode]="drawerMode" opened [ngClass]="(theme == 'dark') ? '' : 'light-card'">
     <div class="categories col-2 p-3 pt-1 w-100">
       <h1 class="text-center m-0 mt-2 w-100 categoriesHeader" style="min-width: 200px;"
         (click)="drawer.toggle(); toggleCategories()">
@@ -69,7 +69,7 @@
           <div class="col-6 col-sm-4 col-md-3 text-center" *ngFor="let item of foodsPF; index as i">
 
             <div *ngIf="item" class="card d-inline-block position-relative my-3 fade-in" (click)="selectFood(item, i)"
-              data-bs-toggle="modal" data-bs-target="#editModal">
+              data-bs-toggle="modal" data-bs-target="#editModal" [ngClass]="(theme == 'dark') ? '' : 'light-card'">
               <div class="image-container">
                 <img [src]="item.imageURL" alt="">
               </div>

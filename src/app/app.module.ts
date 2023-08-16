@@ -23,6 +23,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.component';
 import { AuthComponent } from './auth/auth.component';
 import { AuthGuard } from './auth/auth.guard';
+import { ThemeToggleComponent } from './theme-toggle/theme-toggle.component';
 
 // const routes: Routes = [
 //   { path: 'landing-page', component: LandingPageComponent },
@@ -43,6 +44,7 @@ const routes: Routes = [
     AppComponent,
   ],
   imports: [
+    ThemeToggleComponent,
     NavbarComponent,
     LandingPageComponent,
     LoadingSpinnerComponent,

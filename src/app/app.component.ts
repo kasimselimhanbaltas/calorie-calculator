@@ -1,6 +1,8 @@
 import { Component, OnInit} from '@angular/core';
 import "../../node_modules/bootstrap/dist/js/bootstrap.min.js"
 import { AuthService } from './auth/auth.service';
+import { Subscription } from 'rxjs';
+import { SharedService } from 'src/services/sharedService';
 
 @Component({
   selector: 'app-root',
@@ -8,8 +10,14 @@ import { AuthService } from './auth/auth.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit{
-  
-  constructor(private authService: AuthService) {}
+  theme = "";
+  subscription: Subscription;
+
+  constructor(private authService: AuthService, private sharedService: SharedService) {
+    this.subscription = this.sharedService.getGlobalTheme().subscribe(value => {
+      this.theme = value;
+    });
+   }  
   ngOnInit(): void {
     this.authService.autologin();
   }

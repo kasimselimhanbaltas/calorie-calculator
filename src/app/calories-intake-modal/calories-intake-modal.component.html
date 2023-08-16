@@ -2,7 +2,7 @@
 <div class="modal fade modal-m" id="calories-intake-modal" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
   aria-hidden="true">
   <div class="modal-dialog">
-    <div class="modal-content">
+    <div class="modal-content" *ngIf="selectedFood">
       <div class="modal-header">
         <h5 cl class="modal-title text-light ms-auto mb-0" style="font-size: 25px; font-weight: bold;"
           id="staticBackdropLabel">{{selectedFood.Food}}</h5>

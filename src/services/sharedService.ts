@@ -1,16 +1,21 @@
-import {Injectable, inject} from "@angular/core";
+import {Injectable, inject, OnInit} from "@angular/core";
 import { Firestore, setDoc, doc, getDoc  } from "@angular/fire/firestore";
 import { food } from "src/app/foods-view/foods-view.component";
-import { Observable, Subject } from 'rxjs';
+import { Observable, Subject, BehaviorSubject } from 'rxjs';
 import { intakeNutrient } from "src/app/calories-intake/calories-intake.component";
 import { AuthService } from "src/app/auth/auth.service";
 
 @Injectable({
   providedIn: "root",
 })
-export class SharedService {
+export class SharedService implements OnInit {
 
-  constructor(private authService: AuthService) {};
+  constructor(private authService: AuthService) { }
+
+  ngOnInit(): void {
+    this.globalThemeSubject.next("dark");
+  }
+;
 
   firestore: Firestore = inject(Firestore);
   public foodsList: food[] = [];
@@ -18,11 +23,18 @@ export class SharedService {
   public selectedIndex: number;
   public intakeNutrients: intakeNutrient[] = [];
 
-
   private selectedFoodSubject = new Subject<food>();
   private selectedIndexSubject = new Subject<number>();
   private intakeNutrientsSubject = new Subject<intakeNutrient[]>();
-  private selectedFood: food | null = null;
+  private globalThemeSubject = new BehaviorSubject<string>("dark");
+
+  
+  getGlobalTheme(): Observable<string> {
+    return this.globalThemeSubject.asObservable();
+  }
+  setGlobalTheme(theme) {
+    this.globalThemeSubject.next(theme);
+  }
 
   addToIntakeNutrients(intakeNutrientI: intakeNutrient) {
     console.log("adding: ", intakeNutrientI)
@@ -40,7 +52,6 @@ export class SharedService {
 
   setSelectedFood(food: food) {
     console.log("service :", food)
-    this.selectedFood = food;
     this.selectedFoodSubject.next(food);
   }
 

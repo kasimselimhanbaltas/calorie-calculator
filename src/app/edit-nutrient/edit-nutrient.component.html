@@ -83,7 +83,7 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button *ngIf="editing" (click)="deleteNutrient()" class="btn btn-danger px-2">Delete</button>
+        <button *ngIf="editing" (click)="deleteNutrient()" class="btn btn-danger px-2 disabled">Delete(disabled temporarily)</button>
         <button *ngIf="!editing" (click)="editing = true" class="btn btn-info px-2">Edit</button>
         <button *ngIf="editing" (click)="editing = false" class="btn btn-secondary px-2">Cancel</button>
         <button *ngIf="editing" (click)="updateNutrient()" class="px-2" mat-raised-button color="accent">Save</button>

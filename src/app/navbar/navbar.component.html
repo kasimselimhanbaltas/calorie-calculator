@@ -51,7 +51,14 @@
           <li class="nav-item text-center">
             <a class="nav-link" target="blank" href="https://github.com/kasimselimhanbaltas"><img
                 src="assets/github.png" alt=""></a>
-          </li>-->
+          </li>
+          <li>
+            <app-theme-toggle></app-theme-toggle>
+          </li> -->
+          <li>
+            <mat-slide-toggle [(ngModel)]="themeToggle" class="mt-2" title="Toggle theme" (click)="updateTheme()"></mat-slide-toggle>
+          </li>
+
           <li *ngIf="isAuthenticated" class="nav-item text-center">
             <a class="nav-link" routerLink="/login-register" (click)="logOut()">Logout</a>
           </li>

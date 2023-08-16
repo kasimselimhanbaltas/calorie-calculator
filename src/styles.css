@@ -1,7 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
 
 @import '~bootstrap/dist/css/bootstrap.min.css';
-
+.mat-drawer-container {
+  background-color: transparent;
+}
 
 html, body { min-height: 100vh; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
@@ -14,6 +16,7 @@ mat-hint {
 
 .fade-in {
   animation: fade-in .4s ease-in-out;
+  transition: color .4s, background-color .4s;
 }
 @keyframes fade-in{
   0% {
@@ -43,5 +46,15 @@ input::-webkit-inner-spin-button {
   }
 }
 
+.light-bg {
+  background-color: #abd1c6 !important;
+}
+.light-card {
+  background-color: #004643 !important;
+  color: #abd1c6 !important;
 
+}
+.light-p {
+  color: #abd1c6 !important;
+}
 
