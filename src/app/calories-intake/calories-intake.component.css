@@ -1,3 +1,15 @@
+.my-paginator {
+  position: fixed;
+  bottom: 0;
+  background-color: #121629;
+}
+mat-paginator {
+  display: flex;
+  justify-content: center;
+}
+.paginator-state {
+  justify-content: start !important;
+}
 .decoration-1 {
   content: '';
   position: absolute;
@@ -92,7 +104,7 @@
 }
 
 .categories {
-  background-color: #121629 !important;
+  background-color: #121629;
 }
 
 .categories p {
@@ -163,7 +175,7 @@ p {
 .show-categories-button {
   z-index: 999;
   position: absolute;
-  top: 0;
+  top: 1px;
   left: 0;
   width: 150px;
   background-color: transparent;
@@ -176,7 +188,7 @@ p {
 .show-selected-nutirents-button {
   z-index: 999;
   position: absolute;
-  top: 0;
+  top: 1px;
   left: 100%;
   transform: translateX(-100%);
   width: 140px;
@@ -196,23 +208,38 @@ p {
 .show-selected-nutirents-button {
   z-index: 999 !important;
   color: white;
-  background-color: #121629;
+  background-color: transparent;
   padding: 3px;
   margin: 0;
 }
 
-.show-categories-button:hover,
+/* .show-categories-button:hover,
 .show-selected-nutirents-button:hover {
   background-color: #1216297a;
-}
+} */
 
 .categoriesHeader {
   cursor: pointer;
   user-select: none;
+  transition: all .5s;
+  box-sizing: border-box;
 }
-
+.categoriesHeader:hover {
+  animation: bop .4s;
+} 
+@keyframes bop {
+  0% {
+    scale: 1;
+  }
+  50% {
+    scale: 1.2;
+  }
+  100%{
+    scale: 1;
+  }
+}
 .categories {
-  background-color: #121629 !important;
+  background-color: #121629;
 }
 
 .categories p {
@@ -235,7 +262,7 @@ mat-checkbox {
 }
 
 mat-drawer {
-  background-color: #121629 !important;
+  background-color: #121629;
 }
 
 .card {
@@ -301,10 +328,10 @@ p {
   width: 200px;
 }
 
-mat-paginator {
+/* mat-paginator {
   display: flex;
   justify-content: center !important;
-}
+} */
 
 .badge {
   width: 22px;

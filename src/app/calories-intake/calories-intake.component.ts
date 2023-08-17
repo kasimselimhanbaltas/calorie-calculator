@@ -44,6 +44,7 @@ export class CaloriesIntakeComponent implements OnInit, DoCheck {
   showNutrients = false;
   decoration1Class = "border-0";
   decoration2Class = "border-0";
+  paginatorClass = "";
 
   @ViewChild('drawer') myDrawer!: MatDrawer;
   @ViewChild('drawer2') myDrawer2!: MatDrawer;
@@ -75,8 +76,8 @@ export class CaloriesIntakeComponent implements OnInit, DoCheck {
     if (this.screenWidth >= 1200) {
       this.drawerMode = 'side';
       this.lastScreenSize = this.screenWidth;
-
     }
+    this.paginatorClass = "paginatorstate";
     // Burada ekran genişliği değiştiğinde yapmak istediğiniz işlemleri gerçekleştirebilirsiniz.
   }
   toggleCategories() {
@@ -135,7 +136,16 @@ export class CaloriesIntakeComponent implements OnInit, DoCheck {
 
   pageEvent: PageEvent;
 
-  constructor(private sharedService: SharedService, private authService: AuthService) { }
+  theme = "";
+  subscription: Subscription;
+
+  constructor(private sharedService: SharedService, private authService: AuthService) {
+    this.subscription = this.sharedService.getGlobalTheme().subscribe(value => {
+      this.theme = value;
+    });
+  }
+
+
 
 
   handlePageEvent(e: PageEvent) {
@@ -188,6 +198,11 @@ export class CaloriesIntakeComponent implements OnInit, DoCheck {
   }
 
   ngDoCheck(): void {
+    if(!this.showCategories && !this.showNutrients) {
+      this.paginatorClass = "paginator-state"
+    } else {
+      this.paginatorClass = "";
+    }
     this.updatePFList()
   }
 

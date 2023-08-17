@@ -49,6 +49,7 @@ export class FoodsViewComponent implements OnInit, DoCheck {
       if (this.lastScreenSize == 0 || this.lastScreenSize >= 1200) {
         this.drawerMode = 'over';
         this.myDrawer.close()
+        this.decoration1Class = "";
         this.showCategories = true;
         this.lastScreenSize = this.screenWidth;
       }
@@ -192,6 +193,7 @@ export class FoodsViewComponent implements OnInit, DoCheck {
     if (window.innerWidth < 1200) {
       this.drawerMode = 'over';
       this.myDrawer.close()
+      this.decoration1Class = "";
       this.showCategories = true;
     }
   }

@@ -1,19 +1,13 @@
 <mat-drawer-container class="example-container position-relative fade-in" autosize style="height: 92vh;">
   <mat-drawer #drawer class="example-sidenav" [mode]="drawerMode" opened [ngClass]="(theme == 'dark') ? '' : 'light-card'">
-    <div class="categories col-2 p-3 pt-1 w-100" [ngClass]="(theme == 'dark') ? '' : 'light-card'">
+    <div class="categories col-2 p-3 pt-1 w-100" 
+    [ngClass]="(theme == 'dark') ? '' : 'light-card'">
       <h1 class="text-center m-0 mt-2 w-100 categoriesHeader" style="min-width: 200px;"
         (click)="drawer.toggle(); toggleCategories();">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-          class="bi bi-arrow-right-circle me-3" viewBox="0 0 16 16" style="transform: rotate(180deg);">
-          <path fill-rule="evenodd"
-            d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z" />
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-list-nested me-1 mb-1" viewBox="0 0 16 16">
+          <path fill-rule="evenodd" d="M4.5 11.5A.5.5 0 0 1 5 11h10a.5.5 0 0 1 0 1H5a.5.5 0 0 1-.5-.5zm-2-4A.5.5 0 0 1 3 7h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm-2-4A.5.5 0 0 1 1 3h10a.5.5 0 0 1 0 1H1a.5.5 0 0 1-.5-.5z"/>
         </svg>
         Categories
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-          class="bi bi-arrow-right-circle ms-3" viewBox="0 0 16 16" style="transform: rotate(180deg);">
-          <path fill-rule="evenodd"
-            d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z" />
-        </svg>
       </h1>
       <div class="w-100" *ngFor="let category of baseCategories.sort()">
         <div class="w-100">
@@ -31,7 +25,7 @@
 
     <button *ngIf="showCategories" class="show-categories-button fade-in" (click)="drawer.toggle(); toggleCategories()">
       <h1 class="text-center m-0 mt-2" style="min-width: 200px;">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-list"
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-list mb-1"
         viewBox="0 0 16 16">
         <path fill-rule="evenodd"
           d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" />
@@ -41,7 +35,7 @@
     </button>
     <mat-divider></mat-divider>
 
-    <div class="col-12 ms-auto me-auto">
+    <div class="col-12 ms-auto me-auto mb-5 pb-2">
       <div class="container text-light">
         <div class="food-container row">
           <!-- <div class="col-8">
@@ -66,7 +60,7 @@
               No results were found matching your search data. Want to add a new nutrient? </h1>
           </div>
 
-          <div class="col-6 col-sm-4 col-md-3 text-center" *ngFor="let item of foodsPF; index as i">
+          <div class="col text-center" *ngFor="let item of foodsPF; index as i">
 
             <div *ngIf="item" class="card d-inline-block position-relative my-3 fade-in" (click)="selectFood(item, i)"
               data-bs-toggle="modal" data-bs-target="#editModal" [ngClass]="(theme == 'dark') ? '' : 'light-card'">
@@ -92,7 +86,7 @@
     <!-- <button (click)="addData()" class="btn btn-primary p-2">Add data</button> -->
 
   </div>
-  <div class="col-12 text-center">
+  <div class="col-12 text-center my-paginator">
     <mat-paginator class="bg-transparent text-center ms-auto me-auto" #paginator (page)="handlePageEvent($event)"
       [length]="filteredFV.length" [pageSize]="pageSize" [disabled]="disabled"
       [showFirstLastButtons]="showFirstLastButtons" [pageSizeOptions]="showPageSizeOptions ? pageSizeOptions : []"

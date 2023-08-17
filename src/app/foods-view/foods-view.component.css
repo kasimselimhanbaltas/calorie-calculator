@@ -1,3 +1,8 @@
+.my-paginator {
+  position: fixed;
+  bottom: 0;
+  background-color: #121629;
+}
 .decoration-1 {
   content: '';
   position: absolute;
@@ -24,6 +29,20 @@
 .categoriesHeader{
   cursor: pointer;
   user-select: none;
+}
+.categoriesHeader:hover {
+  animation: bop .4s;
+} 
+@keyframes bop {
+  0% {
+    scale: 1;
+  }
+  50% {
+    scale: 1.2;
+  }
+  100%{
+    scale: 1;
+  }
 }
 .categories {
   background-color: #121629 ;
