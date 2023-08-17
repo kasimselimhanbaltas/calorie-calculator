@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import {MatSelectModule} from '@angular/material/select';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
@@ -13,6 +13,7 @@ import { Firestore, collectionData, collection, addDoc } from '@angular/fire/fir
 import {food} from "../foods-view/foods-view.component"
 import { SharedService } from 'src/services/sharedService';
 import { intakeNutrient } from '../calories-intake/calories-intake.component';
+import { ModalDirective } from 'ngx-bootstrap/modal';
 
 
 
@@ -60,8 +61,14 @@ export class CaloriesIntakeModalComponent implements OnInit  {
       console.log(this.selectedFood);
     });
   }
+
+  @ViewChild('closebutton') closebutton;
+
+
+  public hideChildModal(): void {
+    this.closebutton.nativeElement.click();
+  }
   addToIntakeNutrientsList(food) {
-    console.log("modal//")
     let caloriesPerGram: number = (food.Calories / food.Grams);
     let newNutirentToSave: intakeNutrient = {
       Food: food.Food,
@@ -70,7 +77,8 @@ export class CaloriesIntakeModalComponent implements OnInit  {
       imageURL: food.imageURL
     }
     this.sharedService.addToIntakeNutrients(newNutirentToSave)
-    // this.grams = null;
+    this.hideChildModal()
+    this.grams = null;
   }
 
   // addNutrient() {

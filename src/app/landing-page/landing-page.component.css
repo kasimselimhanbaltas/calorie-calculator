@@ -1,8 +1,17 @@
+.services {
+  min-height: 90vh;
+}
+.service-card {
+  width: 300px;
+  height: 330px;
+  background-color: #121629;
+  color: white;
+}
 .mainDiv {
   background: url('../../assets/images/nutwom.jpg');
   background-size: cover;
-  background-position: 50% 30%;
-  height: 90vh;
+  background-position: 50% 0%;
+  height: 80vh;
 
 }
 .header1 {

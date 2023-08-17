@@ -14,7 +14,8 @@ import { NgOptimizedImage } from '@angular/common'
 import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
-import {MatDrawer, MatSidenavModule} from '@angular/material/sidenav';
+import { MatDrawer, MatSidenavModule } from '@angular/material/sidenav';
+import { ModalDirective } from 'ngx-bootstrap/modal';
 
 export interface intakeNutrient {
   Food: string,
@@ -49,6 +50,7 @@ export class CaloriesIntakeComponent implements OnInit, DoCheck {
   @ViewChild('mainDiv') mainDiv!: HTMLElement;
   @ViewChild('decoration1') decoration1!: HTMLElement;
   @ViewChild('decoration2') decoration2!: HTMLElement;
+
   lastScreenSize: number = 0;
   intakeNutrients: intakeNutrient[] = [];
 
@@ -59,7 +61,7 @@ export class CaloriesIntakeComponent implements OnInit, DoCheck {
     }
     this.screenWidth = window.innerWidth;
     if (this.screenWidth < 1200) {
-      if(this.lastScreenSize == 0 || this.lastScreenSize >= 1200){
+      if (this.lastScreenSize == 0 || this.lastScreenSize >= 1200) {
         this.drawerMode = 'over';
         this.myDrawer.close()
         this.showCategories = true;
@@ -69,7 +71,7 @@ export class CaloriesIntakeComponent implements OnInit, DoCheck {
         this.decoration2Class = "";
         this.lastScreenSize = this.screenWidth;
       }
-    } 
+    }
     if (this.screenWidth >= 1200) {
       this.drawerMode = 'side';
       this.lastScreenSize = this.screenWidth;
@@ -82,7 +84,7 @@ export class CaloriesIntakeComponent implements OnInit, DoCheck {
       console.log("toggling")
       this.showCategories = true;
       this.decoration1Class = "";
-      } else {
+    } else {
       this.showCategories = false;
       this.decoration1Class = "border-0";
 
@@ -98,7 +100,7 @@ export class CaloriesIntakeComponent implements OnInit, DoCheck {
       this.decoration2Class = "border-0";
     }
   }
-  
+
 
   selectedCategories: { [category: string]: boolean } = {};
   baseCategories: Array<string> = [
@@ -145,7 +147,7 @@ export class CaloriesIntakeComponent implements OnInit, DoCheck {
     this.updatePFList();
   }
 
-    
+
   updatePFList() {
     // Copy original list
     this.foodsViewing = this.fetchedFoods;
@@ -153,19 +155,19 @@ export class CaloriesIntakeComponent implements OnInit, DoCheck {
     this.foodsViewing = [];
     let checkCheck = true;
     for (const category in this.selectedCategories) {// Check if no categories selected
-      if (this.selectedCategories[category]){ 
+      if (this.selectedCategories[category]) {
         checkCheck = false; // At least 1 category selected
       }
     }
-    if(checkCheck){ // show all categories
+    if (checkCheck) { // show all categories
       this.foodsViewing = this.fetchedFoods;
     } else {
-      console.log("selected category detected!!  ");  
+      console.log("selected category detected!!  ");
       for (const category in this.selectedCategories) {
         if (this.selectedCategories[category]) {
           // Filter the fetchedFoods list based on the selected category
           const filteredItems = this.fetchedFoods.filter((foodItem) => foodItem.Category === category);
-  
+
           // Concatenate the filtered items to the existing list
           this.foodsViewing = this.foodsViewing.concat(filteredItems);
         }
@@ -177,14 +179,14 @@ export class CaloriesIntakeComponent implements OnInit, DoCheck {
 
     // Pagination
     this.foodsPF = []
-    for (let i = this.pageIndex*this.pageSize; i < (this.pageIndex+1)*this.pageSize; i++) {
-      if(this.filteredFV[i] == undefined) continue
-      this.foodsPF.push(this.filteredFV[i]);        
+    for (let i = this.pageIndex * this.pageSize; i < (this.pageIndex + 1) * this.pageSize; i++) {
+      if (this.filteredFV[i] == undefined) continue
+      this.foodsPF.push(this.filteredFV[i]);
     }
 
     // if(this.foodsPF.length < this.pageSize) this.pageEvent.pageIndex = 0;
   }
-  
+
   ngDoCheck(): void {
     this.updatePFList()
   }
@@ -213,7 +215,7 @@ export class CaloriesIntakeComponent implements OnInit, DoCheck {
     (await this.sharedService.getIntakeNutrients()).subscribe(intakeNutrients => {
       this.intakeNutrients = intakeNutrients;
     });
-    if(window.innerWidth < 1200){
+    if (window.innerWidth < 1200) {
       this.drawerMode = 'over';
       this.myDrawer.close()
       this.myDrawer2.close()
@@ -222,7 +224,7 @@ export class CaloriesIntakeComponent implements OnInit, DoCheck {
       this.decoration1Class = "";
       this.decoration2Class = "";
     }
-    
+
   }
   firestore: Firestore = inject(Firestore);
 
@@ -231,7 +233,7 @@ export class CaloriesIntakeComponent implements OnInit, DoCheck {
   }
 
 
-  selectFood(item: food, index: number){
+  selectFood(item: food, index: number) {
     this.sharedService.setSelectedFood(item);
     this.sharedService.setSelectedIndex(index);
   }

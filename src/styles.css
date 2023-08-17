@@ -65,3 +65,9 @@ input::-webkit-inner-spin-button {
 .light-decoration {
   border-top-color: #004643 !important;
 }
+.dark-button {
+  background-color: #b8c1ec;
+}
+.light-button {
+  background-color: #f9bc60;
+}
