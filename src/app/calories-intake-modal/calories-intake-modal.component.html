@@ -1,8 +1,9 @@
 <!-- Modal -->
-<div class="modal fade modal-m" id="calories-intake-modal" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
-  aria-hidden="true">
+<div class="modal fade modal-m" id="calories-intake-modal" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog">
-    <div class="modal-content" *ngIf="selectedFood">
+    <div class="modal-content" *ngIf="selectedFood"
+      [ngClass]="(theme == 'dark') ? 'dark-modal-dialog' : 'light-modal-dialog'">
       <div class="modal-header">
         <h5 cl class="modal-title text-light ms-auto mb-0" style="font-size: 25px; font-weight: bold;"
           id="staticBackdropLabel">{{selectedFood.Food}}</h5>
@@ -10,10 +11,21 @@
       </div>
       <div class="modal-body text-light">
         <div class="">
-          <div class="example-container row text-center ms-auto me-auto bg-secondary p-4 rounded">
+          <div class="row text-center ms-auto me-auto px-4 rounded dark-modal-inner position-relative"
+            [ngStyle]="warningActive ? {'margin-bottom': '30px'} : {'margin-bottom': '0'}">
+
+            <!-- ERROR MESSAGE -->
+            <div style="visibility: hidden;" class="position-absolute text-white translate-middle display-block"
+              [ngClass]="warningClass">
+              <div class="bg-danger p-2 px-5 rounded">
+                <h3 class="warning-text mb-1">Please specify a gram amount to calculate the calories of the food you
+                  have chosen.</h3>
+              </div>
+            </div>
+
 
             <div class="col-12">
-              <img class="rounded" [src]="selectedFood.imageURL" alt="">
+              <img class="rounded mt-1" [src]="selectedFood.imageURL" alt="">
             </div>
             <div class="col-12">
               <div class="pt-2">{{ (selectedFood.Calories / selectedFood.Grams).toFixed(2) }} Cal/g</div>
@@ -23,7 +35,7 @@
               <mat-label>Grams</mat-label>
               <input name="grams" type="number" matInput [(ngModel)]="grams" placeholder="Ex: 23">
             </mat-form-field>
-          
+
 
           </div>
 
@@ -36,7 +48,8 @@
       </div>
       <div class="modal-footer">
         <!-- (click)="addNutrient()" -->
-        <button class="px-2" mat-raised-button color="accent" (click)="addToIntakeNutrientsList(selectedFood)">Add To List</button>
+        <button class="px-2" mat-raised-button color="accent" (click)="addToIntakeNutrientsList(selectedFood)">Add To
+          List</button>
         <button #closebutton type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
       </div>
     </div>

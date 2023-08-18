@@ -2,15 +2,24 @@
 <div class="modal fade modal-xl" id="detailsModal" data-bs-keyboard="false" tabindex="-1"
   aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog">
-    <div class="modal-content">
+    <div class="modal-content" [ngClass]="(theme == 'dark') ? 'dark-modal-dialog' : 'light-modal-dialog'">
       <div class="modal-header">
         <h5 cl class="modal-title text-light ms-auto mb-0" style="font-size: 25px; font-weight: bold;"
           id="staticBackdropLabel">Add new nutrient</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body">
+      <div class="modal-body text-light">
         <div class="">
-          <div class="row text-center bg-secondary p-4 rounded justify-content-center">
+          <div class="row text-center ms-auto me-auto px-4 rounded dark-modal-inner position-relative"
+            [ngStyle]="warningActive ? {'margin-bottom': '30px'} : {'margin-bottom': '0'}">
+
+            <!-- ERROR MESSAGE -->
+            <div style="visibility: hidden;" class="position-absolute text-white translate-middle display-block"
+              [ngClass]="warningClass">
+              <div class="bg-danger p-2 px-5 rounded">
+                <h3 class="warning-text mb-1">Please make sure to fill in all input fields.</h3>
+              </div>
+            </div>
 
             <div class="d-none d-lg-inline-flex col-1"></div>
             <mat-form-field class="col-12 col-sm-6 col-lg-5">
@@ -26,47 +35,43 @@
             <div class="col-0 col-lg"></div>
             <mat-form-field class="col-12 col-sm-6 col-lg-2">
               <mat-label>Grams</mat-label>
-              <input name="weight" matInput [(ngModel)]="grams" placeholder="Ex: 23">
+              <input type="number" name="weight" matInput [(ngModel)]="grams" placeholder="Ex: 23">
             </mat-form-field>
             <mat-form-field class="col-12 col-sm-6 col-lg-2">
               <mat-label>Calories</mat-label>
-              <input name="weight" matInput [(ngModel)]="calories" placeholder="Ex: 60">
+              <input type="number" name="weight" matInput [(ngModel)]="calories" placeholder="Ex: 60">
             </mat-form-field>
             <mat-form-field class="col-12 col-sm-6 col-lg-2">
               <mat-label>Carbs</mat-label>
-              <input name="weight" matInput [(ngModel)]="carbs" placeholder="Ex: 12">
+              <input type="number" name="weight" matInput [(ngModel)]="carbs" placeholder="Ex: 12">
               <mat-hint class="text-center">*grams</mat-hint>
             </mat-form-field>
             <mat-form-field class="col-12 col-sm-6 col-lg-2">
               <mat-label>Fat</mat-label>
-              <input name="weight" matInput [(ngModel)]="fat" placeholder="Ex: 1">
+              <input type="number" name="weight" matInput [(ngModel)]="fat" placeholder="Ex: 1">
               <mat-hint class="text-center">*grams</mat-hint>
             </mat-form-field>
             <mat-form-field class="col-12 col-sm-6 col-lg-2">
               <mat-label>Protein</mat-label>
-              <input name="weight" matInput [(ngModel)]="protein" placeholder="Ex: 2">
+              <input type="number" name="weight" matInput [(ngModel)]="protein" placeholder="Ex: 2">
               <mat-hint class="text-center">*grams</mat-hint>
             </mat-form-field>
             <div class="col-0 col-lg"></div>
 
             <h1 class="text-center ">Category</h1>
-            <mat-radio-group [(ngModel)]="category" class="col-12 mb-3 categories rounded" aria-label="Select an option">
+            <mat-radio-group  [(ngModel)]="category" class="col-12 mb-3 categories rounded"
+              aria-label="Select an option" [ngClass]="(theme == 'dark') ? 'dark-modal-dialog' : 'light-modal-dialog'">
               <mat-radio-button *ngFor="let cat of baseCategories" [value]="cat">{{cat}}</mat-radio-button>
             </mat-radio-group>
-
-
           </div>
-
           <!-- <div *ngIf="result != 0">
             <h1>{{ result }}</h1>
           </div> -->
-
         </div>
-
       </div>
       <div class="modal-footer">
         <button (click)="addNutrient()" class="px-2" mat-raised-button color="accent">Save</button>
-        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+        <button #closebutton type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
       </div>
     </div>
   </div>

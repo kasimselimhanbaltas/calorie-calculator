@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, ViewChild, inject } from '@angular/core';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -12,6 +12,7 @@ import { MatRadioModule } from '@angular/material/radio';
 import { Firestore, collectionData, collection, addDoc } from '@angular/fire/firestore';
 import { food } from "../foods-view/foods-view.component"
 import { SharedService } from 'src/services/sharedService';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -52,8 +53,35 @@ export class AddNutrientComponent {
     "Soups"
   ]
 
-  constructor(private sharedService: SharedService) {}
+  warningClass = "";
+  warningActive = false;
 
+  updateWarningClass() {
+    //if (this.isAuthenticated) return;
+    if (!this.warningActive) {
+      this.warningClass = "warning"
+      this.warningActive = true;
+      setTimeout(() => {
+        this.warningClass = "";
+        this.warningActive = false
+      }, 3000);
+    }
+  }
+  
+  @ViewChild('closebutton') closebutton;
+
+  public hideChildModal(): void {
+    this.closebutton.nativeElement.click();
+  }
+
+  theme = "";
+  subscription: Subscription;
+
+  constructor(private sharedService: SharedService) {
+    this.subscription = this.sharedService.getGlobalTheme().subscribe(value => {
+      this.theme = value;
+    });
+  }
   addNutrient() {
     let objToInsert: food = {
       Food: this.food,
@@ -65,7 +93,17 @@ export class AddNutrientComponent {
       Protein: this.protein,
       imageURL: this.imageURL
     }
+    for (const key in objToInsert) {
+      if (objToInsert.hasOwnProperty(key)) {
+        const value = objToInsert[key];
+        if (value === null || value === '') {
+          this.updateWarningClass()
+          return;
+        }
+      }
+    }
     this.sharedService.insertFood(objToInsert);
+    this.hideChildModal();
   }
 
 }

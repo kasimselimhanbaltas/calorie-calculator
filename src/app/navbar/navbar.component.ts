@@ -34,7 +34,6 @@ export class NavbarComponent implements OnInit, OnDestroy {
   updateWarningClass() {
     if (this.isAuthenticated) return;
     if (!this.warningActive) {
-      console.log("warningA: ", this.warningActive)
       this.warningClass = "warning"
       this.warningActive = true;
       setTimeout(() => {

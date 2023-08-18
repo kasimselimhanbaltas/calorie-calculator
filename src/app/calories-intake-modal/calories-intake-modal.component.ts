@@ -14,6 +14,8 @@ import {food} from "../foods-view/foods-view.component"
 import { SharedService } from 'src/services/sharedService';
 import { intakeNutrient } from '../calories-intake/calories-intake.component';
 import { ModalDirective } from 'ngx-bootstrap/modal';
+import { Subscription } from 'rxjs';
+import { AuthService } from '../auth/auth.service';
 
 
 
@@ -28,7 +30,7 @@ import { ModalDirective } from 'ngx-bootstrap/modal';
 export class CaloriesIntakeModalComponent implements OnInit  {
   food: string = '';
   category: string = '';
-  grams: number | any = '';
+  grams: number | any = null;
   calories: number | any = '';
   carbs: number | any = '';
   fat: number | any = '';
@@ -53,8 +55,32 @@ export class CaloriesIntakeModalComponent implements OnInit  {
     "Fats, Oils, Shortenings",
     "Soups"
   ]
+
+  warningClass = "";
+  warningActive = false;
+
+  updateWarningClass() {
+    //if (this.isAuthenticated) return;
+    if (!this.warningActive) {
+      this.warningClass = "warning"
+      this.warningActive = true;
+      setTimeout(() => {
+        this.warningClass = "";
+        this.warningActive = false
+      }, 5000);
+    }
+  }
+
+  theme = "";
+  subscription: Subscription;
+
+  constructor(private sharedService: SharedService) {
+    this.subscription = this.sharedService.getGlobalTheme().subscribe(value => {
+      this.theme = value;
+    });
+  }
+
   selectedFood: food;
-  constructor(private sharedService: SharedService) {}
   ngOnInit(): void {
     this.sharedService.getSelectedFood().subscribe(food => {
       this.selectedFood = food;
@@ -69,6 +95,10 @@ export class CaloriesIntakeModalComponent implements OnInit  {
     this.closebutton.nativeElement.click();
   }
   addToIntakeNutrientsList(food) {
+    if(this.grams == null) {
+      this.updateWarningClass();
+      return;
+    }
     let caloriesPerGram: number = (food.Calories / food.Grams);
     let newNutirentToSave: intakeNutrient = {
       Food: food.Food,
