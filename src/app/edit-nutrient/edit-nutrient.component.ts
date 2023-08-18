@@ -1,4 +1,4 @@
-import { Component, EventEmitter, inject, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, inject, OnInit, Output, ViewChild } from '@angular/core';
 import {MatSelectModule} from '@angular/material/select';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
@@ -12,6 +12,7 @@ import {MatRadioModule} from '@angular/material/radio';
 import { Firestore, collectionData, collection, addDoc, and } from '@angular/fire/firestore';
 import {food} from "../foods-view/foods-view.component"
 import { SharedService } from 'src/services/sharedService';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -34,7 +35,6 @@ export class EditNutrientComponent implements OnInit {
       console.log("modal index:", this.selectedIndex)
     });
   }
-  constructor(public sharedService: SharedService) {}
 
   @Output() nutrientDeleted: EventEmitter<any> = new EventEmitter<any>();
 
@@ -71,20 +71,69 @@ export class EditNutrientComponent implements OnInit {
     "Fats, Oils, Shortenings",
     "Soups"
   ]
+  warningClass = "";
+  warningActive = false;
+
+  updateWarningClass() {
+    //if (this.isAuthenticated) return;
+    if (!this.warningActive) {
+      this.warningClass = "warning"
+      this.warningActive = true;
+      setTimeout(() => {
+        this.warningClass = "";
+        this.warningActive = false
+      }, 3000);
+    }
+  }
+  @ViewChild('closebutton') closebutton;
+
+  public hideChildModal(): void {
+    this.closebutton.nativeElement.click();
+  }
+  theme = "";
+  subscription: Subscription;
+
+  constructor(private sharedService: SharedService) {
+    this.subscription = this.sharedService.getGlobalTheme().subscribe(value => {
+      this.theme = value;
+    });
+  }
+  confirmDeleteToggler = false;
+
 
   updateNutrient() {
+    for (const key in this.selectedFood) {
+      if (this.selectedFood.hasOwnProperty(key)) {
+        const value = this.selectedFood[key];
+        if (value === null || value === '') {
+          this.updateWarningClass()
+          return;
+        }
+      }
+    }
     this.editing = false;
     this.sharedService.updateList(this.selectedFood)
   }
 
   deleteNutrient() {
-    console.log("deleting: ", this.selectedIndex);
-    if(this.selectedIndex >= 0 && this.selectedIndex != null){      
-      this.sharedService.deleteFood(this.selectedFood);
+    if(this.selectedIndex >= 0 && this.selectedIndex != null){     
       this.editing = false;
-      this.nutrientDeleted.emit(this.selectedIndex);
+      this.confirmDeleteToggler = true;
+      
     } else {  
       console.log("wtf with index: ", this.selectedIndex);
+    }
+  }
+  
+  deleteCheck(state: boolean) {
+    if(state) {
+      this.sharedService.deleteFood(this.selectedFood);
+      this.editing = false;
+      this.confirmDeleteToggler = false;
+      this.nutrientDeleted.emit(this.selectedIndex);
+      this.hideChildModal();
+    } else {
+      this.confirmDeleteToggler = false;
     }
   }
 }

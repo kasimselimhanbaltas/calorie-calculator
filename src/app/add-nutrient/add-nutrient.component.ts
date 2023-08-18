@@ -9,7 +9,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { MatRadioModule } from '@angular/material/radio';
-import { Firestore, collectionData, collection, addDoc } from '@angular/fire/firestore';
+import { Firestore } from '@angular/fire/firestore';
 import { food } from "../foods-view/foods-view.component"
 import { SharedService } from 'src/services/sharedService';
 import { Subscription } from 'rxjs';

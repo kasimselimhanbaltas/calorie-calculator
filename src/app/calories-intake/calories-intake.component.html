@@ -45,7 +45,7 @@
           </svg>
           Please select nutrients by clicking them and indicate how many grams you consumed.
         </h3>
-        <div class="col-4 m-4 savedNutrient bg-secondary" *ngFor="let intakeNutrient of intakeNutrients; index as i">
+        <div class="col-4 m-4 savedNutrient" *ngFor="let intakeNutrient of intakeNutrients; index as i" [ngClass]="(theme == 'dark') ? 'bg-dark' : 'light-card'">
           <div class="imgcontainer">
             <img [ngSrc]="intakeNutrient.imageURL" width="400" height="200" class="" alt="">
           </div>

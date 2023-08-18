@@ -2,22 +2,32 @@
 <div class="modal fade modal-lg text-light" id="editModal" data-bs-keyboard="false" tabindex="-1"
   aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog">
-    <div class="modal-content">
+    <div class="modal-content" [ngClass]="(theme == 'dark') ? 'dark-modal-dialog' : 'light-modal-dialog'">
       <div class="modal-header">
         <div class="ms-auto" style="font-size: 25px; font-weight: bold;" id="staticBackdropLabel">
           <h1 class="modal-title mb-0" *ngIf="editing">Edit Nutrient</h1>
           <h1 class="modal-title mb-0" *ngIf="!editing">Nutrient Details</h1>
         </div>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="color: white !important"></button>
+        <button (click)="confirmDeleteToggler = false;" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+          style="fill: white !important"></button>
       </div>
-      <div class="modal-body">
+      <div class="modal-body text-light">
         <div class="">
-          <div class="text-center ms-auto me-auto bg-secondary p-4 rounded">
+          <div class="row text-center ms-auto me-auto px-4 rounded dark-modal-inner position-relative"
+            [ngStyle]="warningActive ? {'margin-bottom': '30px'} : {'margin-bottom': '0'}">
+
+            <!-- ERROR MESSAGE -->
+            <div style="visibility: hidden;" class="position-absolute text-white translate-middle display-block"
+              [ngClass]="warningClass">
+              <div class="bg-danger p-2 px-5 rounded">
+                <h3 class="warning-text mb-1">Please make sure to fill in all input fields.</h3>
+              </div>
+            </div>
 
             <div *ngIf="!editing">
               <div class="row justify-content-center">
                 <div class="col-12 col-lg-6">
-                  <img *ngIf="selectedFood" class="rounded img-fluid" [src]="selectedFood.imageURL" alt="">
+                  <img *ngIf="selectedFood" class="rounded img-fluid my-4" [src]="selectedFood.imageURL" alt="">
                 </div>
                 <div class="col-12 col-sm-10 col-lg my-4">
                   <div class="row text-left mx-3" *ngFor="let item of selectedFood | keyvalue; let i = index">
@@ -29,12 +39,17 @@
                     </div>
                   </div>
                 </div>
+                <div *ngIf="confirmDeleteToggler" class="col-12">
+                  <h2 style="font-weight:bold">Are you sure you want to delete this nutrient?</h2>
+                  <button class="btn btn-danger me-4" (click)="deleteCheck(false)">Cancel</button>
+                  <button class="btn btn-success" (click)="deleteCheck(true)">Confirm Delete</button>
+                </div>
               </div>
             </div>
 
 
             <div *ngIf="editing" class="row m-0 p-0 justify-content-center">
-              
+
               <div class="d-none d-lg-inline-flex col-1"></div>
               <mat-form-field class="col-12 col-sm-6 col-lg-5">
                 <mat-label>Nutirent Name</mat-label>
@@ -72,8 +87,7 @@
 
               <div class="radioGroup rounded">
                 <h1 class="text-center">Category</h1>
-                <mat-radio-group [(ngModel)]="selectedFood.Category" class="col-12 mb-3"
-                  aria-label="Select an option">
+                <mat-radio-group [(ngModel)]="selectedFood.Category" class="col-12 mb-3" aria-label="Select an option">
                   <mat-radio-button *ngFor="let cat of baseCategories" [value]="cat">{{cat}}</mat-radio-button>
                 </mat-radio-group>
               </div>
@@ -88,7 +102,7 @@
         <button *ngIf="!editing" (click)="editing = true" class="btn btn-info px-2">Edit</button>
         <button *ngIf="editing" (click)="editing = false" class="btn btn-secondary px-2">Cancel</button>
         <button *ngIf="editing" (click)="updateNutrient()" class="px-2" mat-raised-button color="accent">Save</button>
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button #closebutton type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="confirmDeleteToggler = false;">Close</button>
       </div>
     </div>
   </div>
