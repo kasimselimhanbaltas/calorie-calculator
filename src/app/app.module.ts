@@ -25,6 +25,7 @@ import { AuthComponent } from './auth/auth.component';
 import { AuthGuard } from './auth/auth.guard';
 import { ThemeToggleComponent } from './theme-toggle/theme-toggle.component';
 import { MatInputModule } from '@angular/material/input';
+import { FooterComponent } from './footer/footer.component';
 
 // const routes: Routes = [
 //   { path: 'landing-page', component: LandingPageComponent },
@@ -43,6 +44,7 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
+    FooterComponent,
   ],
   imports: [
     ThemeToggleComponent,
