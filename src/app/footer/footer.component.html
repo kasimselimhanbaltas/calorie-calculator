@@ -1,3 +1,24 @@
-<footer class="footer">
-  <p class="text-muted ms-5">©2023 Kasım Selimhan Baltaş | Tüm hakları saklıdır.</p>
+<div class="bg-light d-block d-md-none" style="padding-top: 1px;"></div>
+<footer class="footer p-3" [ngClass]="(theme == 'dark') ? 'dark-card' : 'light-card'">
+  <!-- Contacts -->
+  <div class="d-flex">
+
+    <p class="m-0 d-inline">©2023 Kasım Selimhan Baltaş | All rights reserved.</p>
+
+    <ul class="ms-auto contacts d-flex mb-0">
+      <li class="nav-item d-inline mx-1">
+        <a class="nav-link text-center" target="blank"
+          href="https://www.linkedin.com/in/kas%C4%B1m-selimhan-balta%C5%9F-2b3832201/"><img
+            src="assets/images/linkedin.png" alt=""></a>
+      </li>
+      <li class="nav-item d-inline mx-1 text-center">
+        <a class="nav-link" target="blank" href="mailto:selimhanbaltas@gmail.com"><img src="assets/images/gmail.png"
+            alt=""></a>
+      </li>
+      <li class="nav-item d-inline mx-1 text-center">
+        <a class="nav-link" target="blank" href="https://github.com/kasimselimhanbaltas"><img
+            src="assets/images/github.png" alt=""></a>
+      </li>
+    </ul>
+  </div>
 </footer>

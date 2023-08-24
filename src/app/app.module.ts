@@ -44,9 +44,9 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    FooterComponent,
   ],
   imports: [
+    FooterComponent,
     ThemeToggleComponent,
     NavbarComponent,
     LandingPageComponent,

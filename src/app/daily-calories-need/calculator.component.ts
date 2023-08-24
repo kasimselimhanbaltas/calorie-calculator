@@ -12,6 +12,7 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { MatButtonModule } from '@angular/material/button';
 import { SharedService } from 'src/services/sharedService';
 import { Subscription } from 'rxjs';
+import { FooterComponent } from '../footer/footer.component';
 
 
 
@@ -28,7 +29,8 @@ import { Subscription } from 'rxjs';
     MatFormFieldModule,
     MatInputModule,
     MatFormFieldModule,
-    MatInputModule],
+    MatInputModule,
+    FooterComponent],
 })
 export class CalculatorComponent implements OnInit{
 
@@ -82,7 +84,7 @@ export class CalculatorComponent implements OnInit{
   fifthFormGroup = this._formBuilder.group({
     fifthCtrl: ['', Validators.required],
   });
-  isLinear = false;
+  isLinear = true;
 
   theme = "";
   subscription: Subscription;

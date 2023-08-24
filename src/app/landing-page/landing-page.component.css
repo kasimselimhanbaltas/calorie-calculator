@@ -1,5 +1,5 @@
 .services {
-  min-height: 90vh;
+  /* min-height: 90vh; */
 }
 .service-card {
   width: 275px;
@@ -40,7 +40,7 @@
 }
 @media screen and (max-width: 600px){
   .header1 {
-    margin-top: 200px !important;
+    margin-top: 100px !important;
     font-size: 24px; 
     line-height: 24px;
     width: 100% !important;
@@ -49,5 +49,33 @@
     font-size: 18px; 
     line-height: 18px;
     width: 100% !important;
+  }
+}
+
+.warning {
+  top: 100%; left: 50%;
+  z-index: 99;
+  visibility: visible !important;
+  animation: warning 3s;
+}
+.warningText {
+  width: 150px !important;
+  font-size: 14px;
+  line-height: 14px;
+}
+@keyframes warning {
+  0% {
+    visibility: visible;
+    opacity: 0;
+  }
+  33% {
+    opacity: .7;
+  }
+  66% {
+    opacity: .7;
+  }
+  100% {
+    visibility: visible;
+    opacity: 0;
   }
 }
