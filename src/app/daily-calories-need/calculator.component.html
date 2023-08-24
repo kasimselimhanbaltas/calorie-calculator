@@ -1,56 +1,226 @@
 <div class="fade-in">
 
-  <h1 class="text-center text-light p-3" style="font-size: 30px; font-weight: bold;">How many calories should I eat in a
+  <h1 class="text-center text-light p-3" style="font-size: 30px; font-weight: bold;" [ngStyle]="verticalNeeded? {'font-size': '20px'} : {}">How many calories should I eat in a
     day?</h1>
-  <div class="text-light" *ngIf="result != 0">
-    <h1 class="text-center"> To maintain your current weight, you must consume {{ result }} calories per day.</h1>
-  </div>
   <div class="">
-    <div class="example-container row text-center ms-auto me-auto justify-content-center">
-      <div class="col-10 col-md-8 col-xl-6 bg-secondary p-2 p-md-5 pt-4 rounded ">
+    <div class="row text-center ms-auto me-auto justify-content-center">
+      <div class="col-12 col-lg-10 p-2 p-md-5 pt-4 rounded" [ngClass]="(theme == 'dark') ? 'dark-bg' : 'light-card'">
+        <!-- <button mat-raised-button (click)="isLinear = !isLinear" id="toggle-linear">
+          {{!isLinear ? 'Enable linear mode' : 'Disable linear mode'}}
+        </button> -->
 
-        <mat-form-field class="col-10 col-md-5 m-1 m-md-3">
-          <mat-label>Weight</mat-label>
-          <input name="weight" type="number" matInput [(ngModel)]="weight" placeholder="Ex: 75 kg">
-          <mat-hint class="text-center">Please enter your weight as kg</mat-hint>
-        </mat-form-field>
 
-        <mat-form-field class="col-10 col-md-5 m-1 m-md-3">
-          <mat-label>Height</mat-label>
-          <input type="number" matInput [(ngModel)]="height" placeholder="Ex: 175 cm">
-          <mat-hint class="text-center">Please enter your height as cm</mat-hint>
-        </mat-form-field>
 
-        <mat-form-field class="col-5 col-md-5 m-1 m-md-3">
-          <mat-label>Gender</mat-label>
-          <mat-select [(ngModel)]="gender">
-            <mat-option value="Male">Male</mat-option>
-            <mat-option value="Female">Female</mat-option>
-          </mat-select>
-        </mat-form-field>
+        <mat-vertical-stepper *ngIf="verticalNeeded" [linear]="isLinear" #stepper class="rounded text-light"  [ngClass]="(theme == 'dark') ? 'dark-bg' : 'light-card'">
 
-        <mat-form-field class="col-5 col-md-5 m-1 m-md-3">
-          <mat-label>Age</mat-label>
-          <input type="number" matInput [(ngModel)]="age" placeholder="Ex: 25">
-        </mat-form-field>
+          <mat-step [stepControl]="firstFormGroup">
+            <form [formGroup]="firstFormGroup">
+              <ng-template matStepLabel>Weight</ng-template>
+              <h3>Type your weight as kilograms</h3>
+              <mat-form-field>
+                <mat-label>weight</mat-label>
+                <input formControlName="firstCtrl" matInput name="weight" type="number" matInput [(ngModel)]="weight" placeholder="Ex: 75 kg"
+                  required>
+              </mat-form-field>
+              <div>
+                <button class="btn btn-success" matStepperNext>Next</button>
+              </div>
+            </form>
+          </mat-step>
 
-        <h2 class="text-light mb-1">Select your daily activity level</h2>
-        <mat-radio-group [(ngModel)]="activity_level" class="col-12 mb-3" aria-label="Select an option">
-          <mat-radio-button value="1">Very Active</mat-radio-button>
-          <mat-radio-button value="2">Active</mat-radio-button>
-          <mat-radio-button value="3">Moderately Active</mat-radio-button>
-          <mat-radio-button value="4">Lightly Active</mat-radio-button>
-        </mat-radio-group>
+          <mat-step [stepControl]="secondFormGroup" label="Fill out your address">
+            <form [formGroup]="secondFormGroup">
+              <ng-template matStepLabel>Height</ng-template>
+              <h3>Type your height as centimeters</h3>
+              <mat-form-field>
+                <mat-label>height</mat-label>
+                <input matInput formControlName="secondCtrl" type="number" matInput [(ngModel)]="height"
+                  placeholder="Ex: 175 cm" required>
+              </mat-form-field>
+              <div>
+                <button class="btn btn-danger" matStepperPrevious>Back</button>
+                <button class="btn btn-success ms-3" matStepperNext>Next</button>
+              </div>
+            </form>
+          </mat-step>
 
-        <div class="col-12 justify-content-end row my-3">
+          <mat-step [stepControl]="thirdFormGroup" label="Fill out your address">
+            <form [formGroup]="thirdFormGroup">
+              <ng-template matStepLabel>Gender</ng-template>
+              <h3>What is your gender?</h3>
+              <mat-form-field>
+                <mat-label>Gender</mat-label>
+                <mat-select [(ngModel)]="gender" formControlName="thirdCtrl">
+                  <mat-option value="Male">Male</mat-option>
+                  <mat-option value="Female">Female</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <div>
+                <button class="btn btn-danger" matStepperPrevious>Back</button>
+                <button class="btn btn-success ms-3" matStepperNext>Next</button>
+              </div>
+            </form>
+          </mat-step>
 
-          <button class="col-6" mat-raised-button color="accent" (click)="onButtonClick()">Calculate</button>
-        </div>
+          <mat-step [stepControl]="fourthFormGroup" label="Fill out your address">
+            <form [formGroup]="fourthFormGroup">
+              <ng-template matStepLabel>Age</ng-template>
+              <h3>Type your age</h3>
+              <mat-form-field>
+                <mat-label>age</mat-label>
+                <input matInput formControlName="fourthCtrl" type="number" matInput [(ngModel)]="age"
+                  placeholder="Ex: 25" required>
+              </mat-form-field>
+              <div>
+                <button class="btn btn-danger" matStepperPrevious>Back</button>
+                <button class="btn btn-success ms-3" matStepperNext>Next</button>
+              </div>
+            </form>
+          </mat-step>
 
+          
+          <mat-step [stepControl]="fifthFormGroup" label="Fill out your address" class="pe-0">
+            <form [formGroup]="fifthFormGroup">
+              <ng-template matStepLabel>Activity</ng-template>
+              <h3>What is your daily activity level?</h3>
+              <mat-form-field class="w-75">
+                <input matInput formControlName="fifthCtrl" type="number" matInput [(ngModel)]="age"
+                  placeholder="Ex: 25" required class="d-none">
+                <h4 class="text-light mb-1">Select your daily activity level</h4>
+                <mat-radio-group [(ngModel)]="activity_level" class="mb-3" aria-label="Select an option"  formControlName="fifthCtrl" >
+                  <mat-radio-button class="d-inline-block my-2" style="font-size: 5px !important; margin-left: 0 !important;" value="1">Very Active: Physically demanding job (e.g. builder)</mat-radio-button> <br>
+                  <mat-radio-button class="d-inline-block my-2" style="font-size: 5px !important; margin-left: 0 !important;" value="2">Active: Mostly walking (e.g. sales, server)</mat-radio-button> <br>
+                  <mat-radio-button class="d-inline-block my-2" style="font-size: 5px !important; margin-left: 0 !important;" value="3">Moderately Active: Mostly standing (e.g. teacher, cashier)</mat-radio-button> <br>
+                  <mat-radio-button class="d-inline-block my-2" style="font-size: 5px !important; margin-left: 0 !important;" value="4">Lightly Active: Mostly sitting (e.g. office worker)</mat-radio-button>
+                </mat-radio-group>
+              </mat-form-field>
+              <div>
+                <button class="btn btn-danger" matStepperPrevious>Back</button>
+                <button class="btn btn-success ms-3" matStepperNext (click)="onButtonClick()">Finish</button>
+                <!-- <button matStepperNext class="col-6" mat-raised-button color="accent" (click)="onButtonClick()">Calculate</button> -->
+
+              </div>
+            </form>
+          </mat-step>
+
+
+          <mat-step>
+            <ng-template matStepLabel>Done</ng-template>
+            <div class="text-light" *ngIf="result != 0">
+              <h3 class="text-center mt-2"> To maintain your current weight, you must consume {{ result }} calories per day.</h3>
+            </div>
+            <div>
+              <button mat-button matStepperPrevious>Back</button>
+              <button mat-button (click)="stepper.reset()">Reset</button>
+            </div>
+          </mat-step>
+        </mat-vertical-stepper>
+        <!-- VERTICAL STEPPER END -->
+
+        <!-- HORIZONTAL STEPPER START -->
+        <mat-stepper  *ngIf="!verticalNeeded" [linear]="isLinear" #stepper class="rounded text-light"  [ngClass]="(theme == 'dark') ? 'dark-bg' : 'light-card'">
+          <mat-step [stepControl]="firstFormGroup">
+            <form [formGroup]="firstFormGroup">
+              <ng-template matStepLabel>Weight</ng-template>
+              <h3>Type your weight as kilograms</h3>
+              <mat-form-field>
+                <mat-label>weight</mat-label>
+                <input formControlName="firstCtrl" matInput name="weight" type="number" matInput [(ngModel)]="weight" placeholder="Ex: 75 kg"
+                  required>
+              </mat-form-field>
+              <div>
+                <button class="btn btn-success" matStepperNext>Next</button>
+              </div>
+            </form>
+          </mat-step>
+
+          <mat-step [stepControl]="secondFormGroup" label="Fill out your address">
+            <form [formGroup]="secondFormGroup">
+              <ng-template matStepLabel>Height</ng-template>
+              <h3>Type your height as centimeters</h3>
+              <mat-form-field>
+                <mat-label>height</mat-label>
+                <input matInput formControlName="secondCtrl" type="number" matInput [(ngModel)]="height"
+                  placeholder="Ex: 175 cm" required>
+              </mat-form-field>
+              <div>
+                <button class="btn btn-danger" matStepperPrevious>Back</button>
+                <button class="btn btn-success ms-3" matStepperNext>Next</button>
+              </div>
+            </form>
+          </mat-step>
+
+          <mat-step [stepControl]="thirdFormGroup" label="Fill out your address">
+            <form [formGroup]="thirdFormGroup">
+              <ng-template matStepLabel>Gender</ng-template>
+              <h3>What is your gender?</h3>
+              <mat-form-field>
+                <mat-label>Gender</mat-label>
+                <mat-select [(ngModel)]="gender" formControlName="thirdCtrl">
+                  <mat-option value="Male">Male</mat-option>
+                  <mat-option value="Female">Female</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <div>
+                <button class="btn btn-danger" matStepperPrevious>Back</button>
+                <button class="btn btn-success ms-3" matStepperNext>Next</button>
+              </div>
+            </form>
+          </mat-step>
+
+          <mat-step [stepControl]="fourthFormGroup" label="Fill out your address">
+            <form [formGroup]="fourthFormGroup">
+              <ng-template matStepLabel>Age</ng-template>
+              <h3>Type your age</h3>
+              <mat-form-field>
+                <mat-label>age</mat-label>
+                <input matInput formControlName="fourthCtrl" type="number" matInput [(ngModel)]="age"
+                  placeholder="Ex: 25" required>
+              </mat-form-field>
+              <div>
+                <button class="btn btn-danger" matStepperPrevious>Back</button>
+                <button class="btn btn-success ms-3" matStepperNext>Next</button>
+              </div>
+            </form>
+          </mat-step>
+
+          
+          <mat-step [stepControl]="fifthFormGroup" label="Fill out your address">
+            <form [formGroup]="fifthFormGroup">
+              <ng-template matStepLabel>Activity</ng-template>
+              <h3 >What is your daily activity level?</h3>
+              <mat-form-field class="w-75">
+                <input matInput formControlName="fifthCtrl" type="number" matInput [(ngModel)]="age"
+                  placeholder="Ex: 25" required class="d-none">
+                <h2 class="text-light mb-1">Select your daily activity level</h2>
+                <mat-radio-group [(ngModel)]="activity_level" class="mb-3" aria-label="Select an option"  formControlName="fifthCtrl" >
+                  <mat-radio-button class="ms-3" value="1">Very Active: Physically demanding job (e.g. builder)</mat-radio-button> <br>
+                  <mat-radio-button value="2">Active: Mostly walking (e.g. sales, server)</mat-radio-button> <br>
+                  <mat-radio-button value="3">Moderately Active: Mostly standing (e.g. teacher, cashier)</mat-radio-button> <br>
+                  <mat-radio-button value="4">Lightly Active: Mostly sitting (e.g. office worker)</mat-radio-button>
+                </mat-radio-group>
+              </mat-form-field>
+              <div>
+                <button class="btn btn-danger" matStepperPrevious>Back</button>
+                <button class="btn btn-success ms-3" matStepperNext (click)="onButtonClick()">Finish</button>
+
+              </div>
+            </form>
+          </mat-step>
+
+
+          <mat-step>
+            <ng-template matStepLabel>Done</ng-template>
+            <div class="text-light" *ngIf="result != 0">
+              <h1 class="text-center"> To maintain your current weight, you must consume {{ result }} calories per day.</h1>
+            </div>
+            <div>
+              <button class="btn btn-danger"  matStepperPrevious>Back</button>
+              <button class="btn btn-info ms-4" (click)="stepper.reset()">Reset</button>
+            </div>
+          </mat-step>
+        </mat-stepper> 
       </div>
-
     </div>
-
-
   </div>
 </div>

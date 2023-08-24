@@ -45,13 +45,19 @@ input::-webkit-inner-spin-button {
     opacity: 1;
   }
 }
-
+.dark-bg {
+  background-color: #121629 !important;
+}
 .light-bg {
   background-color: #abd1c6 !important;
 }
 .light-card {
   background-color: #004643 !important;
   color: #abd1c6 !important;
+}
+.dark-card {
+  background-color: #121629 !important;
+  color: white !important;
 }
 .light-p {
   color: #abd1c6 !important;

@@ -102,7 +102,7 @@
         <button *ngIf="!editing" (click)="editing = true" class="btn btn-info px-2">Edit</button>
         <button *ngIf="editing" (click)="editing = false" class="btn btn-secondary px-2">Cancel</button>
         <button *ngIf="editing" (click)="updateNutrient()" class="px-2" mat-raised-button color="accent">Save</button>
-        <button #closebutton type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="confirmDeleteToggler = false;">Close</button>
+        <button #closebutton type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="confirmDeleteToggler = false; editing = false;">Close</button>
       </div>
     </div>
   </div>

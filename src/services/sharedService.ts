@@ -13,7 +13,7 @@ export class SharedService implements OnInit {
   constructor(private authService: AuthService) { }
 
   ngOnInit(): void {
-    this.globalThemeSubject.next("dark");
+    this.globalThemeSubject.next("light");
   }
 ;
 
@@ -26,7 +26,7 @@ export class SharedService implements OnInit {
   private selectedFoodSubject = new Subject<food>();
   private selectedIndexSubject = new Subject<number>();
   private intakeNutrientsSubject = new Subject<intakeNutrient[]>();
-  private globalThemeSubject = new BehaviorSubject<string>("dark");
+  private globalThemeSubject = new BehaviorSubject<string>("light");
 
   
   getGlobalTheme(): Observable<string> {

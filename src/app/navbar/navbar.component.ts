@@ -52,7 +52,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
     });
   }
 
-  themeToggle = true;
+  themeToggle = false;
   
   updateTheme() {
     this.themeToggle = !this.themeToggle;

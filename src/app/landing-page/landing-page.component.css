@@ -2,10 +2,15 @@
   min-height: 90vh;
 }
 .service-card {
-  width: 300px;
-  height: 330px;
+  width: 275px;
+  height: 310px;
   background-color: #121629;
   color: white;
+  margin: 20px;
+}
+.service-card h1 {
+  font-size: 21px !important;
+  line-height: 25px;
 }
 .mainDiv {
   background: url('../../assets/images/nutwom.jpg');

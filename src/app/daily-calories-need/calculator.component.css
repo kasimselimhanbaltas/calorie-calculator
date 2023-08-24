@@ -2,3 +2,12 @@
   margin-left: 16px;
   color: black !important;
 }
+h3{
+  margin-top: 20px !important;
+}
+mat-vertical-content {
+    padding: 0 !important;
+}
+.mat-vertical-content {
+  padding: 0 !important;
+}

@@ -24,6 +24,7 @@ import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.compo
 import { AuthComponent } from './auth/auth.component';
 import { AuthGuard } from './auth/auth.guard';
 import { ThemeToggleComponent } from './theme-toggle/theme-toggle.component';
+import { MatInputModule } from '@angular/material/input';
 
 // const routes: Routes = [
 //   { path: 'landing-page', component: LandingPageComponent },
@@ -60,6 +61,7 @@ const routes: Routes = [
     BrowserAnimationsModule,
     RouterModule.forRoot(routes),
     FormsModule,
+    MatInputModule,
     BrowserModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideFirestore(() => getFirestore()),
