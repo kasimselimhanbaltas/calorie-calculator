@@ -35,13 +35,13 @@
           Total Calories: {{ getTotalCalories().calories.toFixed(2)}}
         </h3>
         <h3 class="text-end me-3" *ngIf="intakeNutrients.length != 0">
-          Total Carbs: {{ getTotalCalories().carbs.toFixed(2)}}
+          Total Carbohydrate: {{ getTotalCalories().carbs.toFixed(2)}}
         </h3>
         <h3 class="text-end me-3" *ngIf="intakeNutrients.length != 0">
-          Total Fats: {{ getTotalCalories().fats.toFixed(2)}}
+          Total Fat: {{ getTotalCalories().fats.toFixed(2)}}
         </h3>
         <h3 class="text-end me-3" *ngIf="intakeNutrients.length != 0">
-          Total Proteins: {{ getTotalCalories().proteins.toFixed(2)}}
+          Total Protein: {{ getTotalCalories().proteins.toFixed(2)}}
         </h3>
         <div class="my-divider my-0" style="width: 90% !important;"></div>
       </div>
@@ -132,7 +132,7 @@
 
             </div>
           </div>
-          <div class="col-12 row pe-0">
+          <div class="col-12 row px-0 ms-auto me-auto">
             <div class="col row pe-0 mb-5 pb-2">
 
               <div *ngIf="filteredFV.length == 0" class="col-12">
@@ -141,7 +141,7 @@
                   No results were found matching your search data. Click here to add a new nutrient!</h1>
               </div>
 
-              <div class="col text-center" *ngFor="let item of foodsPF; index as i">
+              <div class="col text-center ps-2 ps-sm-3 pe-0" *ngFor="let item of foodsPF; index as i">
                 <div *ngIf="item" class="card d-inline-block position-relative my-3 fade-in"
                   (click)="selectFood(item, i)" 
                   [ngClass]="(theme == 'dark') ? '' : 'light-card'"

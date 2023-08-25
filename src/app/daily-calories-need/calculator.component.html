@@ -95,7 +95,7 @@
               </mat-form-field>
               <div>
                 <button class="btn btn-danger" matStepperPrevious>Back</button>
-                <button class="btn btn-success ms-3 disabled" matStepperNext (click)="onButtonClick()"  [ngClass]="(activity_level == 1 || activity_level == 2 || activity_level == 3 || activity_level == 4) ? '' : 'disabled'">Finish</button>
+                <button class="btn btn-success ms-3" matStepperNext (click)="onButtonClick()"  [ngClass]="(activity_level == 1 || activity_level == 2 || activity_level == 3 || activity_level == 4) ? '' : 'disabled'">Finish</button>
                 <!-- <button matStepperNext class="col-6" mat-raised-button color="accent" (click)="onButtonClick()">Calculate</button> -->
 
               </div>

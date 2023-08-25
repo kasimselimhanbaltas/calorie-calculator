@@ -103,6 +103,10 @@ export class CaloriesIntakeModalComponent implements OnInit  {
     let carbsPerGram: number = (food.Carbs / food.Grams);
     let fatsPerGram: number = (food.Fat / food.Grams);
     let proteinsPerGram: number = (food.Protein / food.Grams);
+    if(food.Calories == "t") caloriesPerGram = 0;
+    if(food.Carbs == "t") carbsPerGram = 0;
+    if(food.Fat == "t") fatsPerGram = 0;
+    if(food.Protein == "t") proteinsPerGram = 0;
     let newNutirentToSave: intakeNutrient = {
       Food: food.Food,
       Grams: this.grams,
