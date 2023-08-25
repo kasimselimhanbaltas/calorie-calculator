@@ -9,11 +9,26 @@ import { AuthService } from "src/app/auth/auth.service";
   providedIn: "root",
 })
 export class SharedService implements OnInit {
+  getThemeFromLocalStorage(): string | any {
+    this.theme = localStorage.getItem('theme');
+    console.log("****", localStorage.getItem('theme'))
+    if (!this.theme) {
+      console.log("**/*/11,", this.theme, localStorage.getItem('theme'))
+      this.theme = "light";
+      this.setThemeToLocalStorage('light');
+    }
+    this.setGlobalTheme(this.theme);
+  }
+  setThemeToLocalStorage(theme: string) {
+    localStorage.setItem('theme', theme)
+  }
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService) { 
+    this.getThemeFromLocalStorage();
+  }
+  theme = null;
 
   ngOnInit(): void {
-    this.globalThemeSubject.next("light");
   }
 ;
 
@@ -33,6 +48,7 @@ export class SharedService implements OnInit {
     return this.globalThemeSubject.asObservable();
   }
   setGlobalTheme(theme) {
+    this.setThemeToLocalStorage(theme);
     this.globalThemeSubject.next(theme);
   }
 

@@ -49,10 +49,15 @@ export class NavbarComponent implements OnInit, OnDestroy {
   constructor(private authService: AuthService, private router: Router, private sharedService: SharedService) { 
     this.subscription = this.sharedService.getGlobalTheme().subscribe(value => {
       this.theme = value;
+      if(this.theme == "light") {
+        this.themeToggle = false;
+      } else {
+        this.themeToggle = true;
+      }
     });
   }
 
-  themeToggle = false;
+  themeToggle: boolean;
   
   updateTheme() {
     this.themeToggle = !this.themeToggle;

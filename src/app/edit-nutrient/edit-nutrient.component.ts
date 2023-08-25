@@ -13,6 +13,7 @@ import { Firestore, collectionData, collection, addDoc, and } from '@angular/fir
 import {food} from "../foods-view/foods-view.component"
 import { SharedService } from 'src/services/sharedService';
 import { Subscription } from 'rxjs';
+import { AuthService } from '../auth/auth.service';
 
 
 @Component({
@@ -93,9 +94,15 @@ export class EditNutrientComponent implements OnInit {
   theme = "";
   subscription: Subscription;
 
-  constructor(private sharedService: SharedService) {
+  private userSub: Subscription;
+  isAuthenticated = false;
+
+  constructor(private sharedService: SharedService, private authService: AuthService) {
     this.subscription = this.sharedService.getGlobalTheme().subscribe(value => {
       this.theme = value;
+    });
+    this.userSub = this.authService.user.subscribe(user => {
+      this.isAuthenticated = !!user;
     });
   }
   confirmDeleteToggler = false;

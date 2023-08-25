@@ -65,7 +65,7 @@
             <a class="nav-link rounded text-dark" routerLink="/login-register" (click)="logOut()" [ngClass]="(theme == 'dark') ? 'dark-button' : 'light-button'">Logout</a>
           </li>
           <li *ngIf="!isAuthenticated" class="nav-item text-center">
-            <a class="nav-link rounded text-dark" routerLink="/login-register" [ngClass]="(theme == 'dark') ? 'dark-button' : 'light-button'">
+            <a class="nav-link rounded text-dark btn btn-primary" routerLink="/login-register" [ngClass]="(theme == 'dark') ? 'dark-button' : 'light-button'">
               Sign in/Sign up
             </a>
           </li>

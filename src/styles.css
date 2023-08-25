@@ -1,5 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
 
+
+*{
+  transition: .4s color, .4s background-color;
+}
+
 @import '~bootstrap/dist/css/bootstrap.min.css';
 .mat-drawer-container {
   background-color: transparent;
@@ -24,6 +29,19 @@ mat-hint {
   }
   100% {
     opacity: 1;
+  }
+}
+
+
+@keyframes bop {
+  0% {
+    scale: 1;
+  }
+  50% {
+    scale: 1.2;
+  }
+  100%{
+    scale: 1;
   }
 }
 

@@ -8,6 +8,10 @@
   color: white;
   margin: 20px;
 }
+.service-card:hover {
+  animation: bop .4s;
+} 
+
 .service-card h1 {
   font-size: 21px !important;
   line-height: 25px;

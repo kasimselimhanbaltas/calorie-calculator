@@ -21,7 +21,10 @@ export interface intakeNutrient {
   Food: string,
   Grams: number,
   CaloriesPerGram: number,
-  imageURL: string
+  imageURL: string,
+  CarbsPerGram: number,
+  FatPerGram: number,
+  ProteinPerGram: number,
 }
 
 @Component({
@@ -209,11 +212,27 @@ export class CaloriesIntakeComponent implements OnInit, DoCheck {
   deleteSavedNutrient(index) {
     console.log("delete: ", index)
     this.sharedService.deleteFromIntakeNutrients(index);
-  }
-  getTotalCalories(): number {
-    return this.intakeNutrients.reduce((total, nutrient) => {
+  } 
+  getTotalCalories(): any {
+    let total: any = {
+      calories: 0,
+      carbs: 0,
+      fats: 0,
+      proteins: 0
+    }
+    total.calories = this.intakeNutrients.reduce((total, nutrient) => {
       return total + nutrient.Grams * nutrient.CaloriesPerGram;
     }, 0);
+    total.carbs = this.intakeNutrients.reduce((total, nutrient) => {
+      return total + nutrient.Grams * nutrient.CarbsPerGram;
+    }, 0);
+    total.fats = this.intakeNutrients.reduce((total, nutrient) => {
+      return total + nutrient.Grams * nutrient.FatPerGram;
+    }, 0);
+    total.proteins = this.intakeNutrients.reduce((total, nutrient) => {
+      return total + nutrient.Grams * nutrient.ProteinPerGram;
+    }, 0);
+    return total;
   }
 
   isAuthenticated = false;

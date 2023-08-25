@@ -3,7 +3,9 @@
   text-align: center;
   padding: 0px;
 }
-
+.contacts img:hover{
+  animation: bop .4s;
+}
 
 @media screen and (max-width: 600px){
   p {

@@ -100,10 +100,16 @@ export class CaloriesIntakeModalComponent implements OnInit  {
       return;
     }
     let caloriesPerGram: number = (food.Calories / food.Grams);
+    let carbsPerGram: number = (food.Carbs / food.Grams);
+    let fatsPerGram: number = (food.Fat / food.Grams);
+    let proteinsPerGram: number = (food.Protein / food.Grams);
     let newNutirentToSave: intakeNutrient = {
       Food: food.Food,
       Grams: this.grams,
       CaloriesPerGram: Math.round( caloriesPerGram * 1e2 ) / 1e2,
+      CarbsPerGram: Math.round( carbsPerGram * 1e2 ) / 1e2,
+      FatPerGram: Math.round( fatsPerGram * 1e2 ) / 1e2,
+      ProteinPerGram: Math.round( proteinsPerGram * 1e2 ) / 1e2,
       imageURL: food.imageURL
     }
     this.sharedService.addToIntakeNutrients(newNutirentToSave)

@@ -32,7 +32,16 @@
           Selected Nutrients
         </h1>
         <h3 class="text-end me-3" *ngIf="intakeNutrients.length != 0">
-          Total Calories: {{ getTotalCalories().toFixed(2)}}
+          Total Calories: {{ getTotalCalories().calories.toFixed(2)}}
+        </h3>
+        <h3 class="text-end me-3" *ngIf="intakeNutrients.length != 0">
+          Total Carbs: {{ getTotalCalories().carbs.toFixed(2)}}
+        </h3>
+        <h3 class="text-end me-3" *ngIf="intakeNutrients.length != 0">
+          Total Fats: {{ getTotalCalories().fats.toFixed(2)}}
+        </h3>
+        <h3 class="text-end me-3" *ngIf="intakeNutrients.length != 0">
+          Total Proteins: {{ getTotalCalories().proteins.toFixed(2)}}
         </h3>
         <div class="my-divider my-0" style="width: 90% !important;"></div>
       </div>
@@ -45,7 +54,7 @@
           </svg>
           Please select nutrients by clicking them and indicate how many grams you consumed.
         </h3>
-        <div class="col-4 m-4 savedNutrient" *ngFor="let intakeNutrient of intakeNutrients; index as i" [ngClass]="(theme == 'dark') ? 'bg-dark' : 'light-card'">
+        <div class="col-4 m-4 savedNutrient" *ngFor="let intakeNutrient of intakeNutrients; index as i" [ngClass]="(theme == 'dark') ? 'bg-dark' : 'bg-dark'">
           <div class="imgcontainer">
             <img [ngSrc]="intakeNutrient.imageURL" width="400" height="200" class="" alt="">
           </div>
