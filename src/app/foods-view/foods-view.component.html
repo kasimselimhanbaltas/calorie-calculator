@@ -35,7 +35,7 @@
     </button>
     <mat-divider></mat-divider>
 
-    <div class="col-12 ms-auto me-auto mb-5 pb-2 px-0 ">
+    <div class="col-12 ms-auto me-auto mb-5 pb-2 ">
       <div class="container text-light">
         <div class="food-container row">
           <!-- <div class="col-8">
@@ -60,7 +60,7 @@
               No results were found matching your search data. Want to add a new nutrient? </h1>
           </div>
 
-          <div class="col text-center ps-2 ps-sm-3 pe-0" *ngFor="let item of foodsPF; index as i">
+          <div class="col text-center ps-2 ps-sm-3 pe-1" *ngFor="let item of foodsPF; index as i">
 
             <div *ngIf="item" class="card d-inline-block position-relative my-3 fade-in" (click)="selectFood(item, i)"
               data-bs-toggle="modal" data-bs-target="#editModal" [ngClass]="(theme == 'dark') ? '' : 'light-card'">

@@ -108,12 +108,11 @@
   </button>
 
   <!-- Decorations -->
-
   <div #decoration1 class="decoration-1" [ngClass]="decoration1Class" [ngClass]="[true ? decoration1Class : '', (theme == 'dark') ? '' : 'light-decoration']"></div>
   <div #decoration2 class="decoration-2" [ngClass]="decoration2Class" [ngClass]="[true ? decoration2Class : '', (theme == 'dark') ? '' : 'light-decoration']"></div>
 
   <!-- Main Container -->
-  <div class="row m-0 p-0 text-light position-relative mainDiv" #mainDiv>
+  <div class="row m-0 p-0 text-light position-relative mainDiv mb-5" #mainDiv>
     <mat-divider></mat-divider>
     <div class="col-12 ms-auto me-auto pe-0">
       <div class="container text-light">
@@ -132,7 +131,7 @@
 
             </div>
           </div>
-          <div class="col-12 row px-0 ms-auto me-auto">
+          <div class="col-12 row px-2 ms-auto me-auto">
             <div class="col row pe-0 mb-5 pb-2">
 
               <div *ngIf="filteredFV.length == 0" class="col-12">

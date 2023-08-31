@@ -8,3 +8,7 @@
 .main-container {
   overflow: hidden;
 }
+.selectedMode {
+  scale: 1.2;
+  color: #abd1c6 !important;
+}

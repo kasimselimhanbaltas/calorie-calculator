@@ -2,7 +2,7 @@
 
 
 *{
-  transition: .4s color, .4s background-color;
+  transition: .4s color, .4s background-color,  .4s background-image,  .4s background, .2s scale;
 }
 
 @import '~bootstrap/dist/css/bootstrap.min.css';
@@ -67,7 +67,8 @@ input::-webkit-inner-spin-button {
   background-color: #121629 !important;
 }
 .light-bg {
-  background-color: #abd1c6 !important;
+  background: rgb(49,167,133);
+  background: radial-gradient(circle, rgba(49,167,133,1) 0%, rgba(171,209,198,1) 79%);
 }
 .light-card {
   background-color: #004643 !important;

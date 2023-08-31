@@ -146,6 +146,9 @@ export class CaloriesIntakeComponent implements OnInit, DoCheck {
     this.subscription = this.sharedService.getGlobalTheme().subscribe(value => {
       this.theme = value;
     });
+    this.sharedService.getIntakeNutrients().subscribe(intakeNutrients => {
+      this.intakeNutrients = intakeNutrients;
+    });
   }
 
 
@@ -206,7 +209,9 @@ export class CaloriesIntakeComponent implements OnInit, DoCheck {
     } else {
       this.paginatorClass = "";
     }
+    console.log(this.intakeNutrients)
     this.updatePFList()
+  
   }
 
   deleteSavedNutrient(index) {

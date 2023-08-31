@@ -1,5 +1,5 @@
 import {Injectable, inject, OnInit} from "@angular/core";
-import { Firestore, setDoc, doc, getDoc  } from "@angular/fire/firestore";
+import { Firestore, setDoc, doc, getDoc, collection, collectionData  } from "@angular/fire/firestore";
 import { food } from "src/app/foods-view/foods-view.component";
 import { Observable, Subject, BehaviorSubject } from 'rxjs';
 import { intakeNutrient } from "src/app/calories-intake/calories-intake.component";
@@ -120,26 +120,48 @@ export class SharedService implements OnInit {
     setDoc(doc(this.firestore, "nutrients", "list"), {foods})
   }
 
-  // Fetches entire nutrients list as food[]
-  public async getFoods(): Promise<Observable<food[]>> {
-    if (this.foodsList.length !== 0) {
-      console.log("Foods already fetched!")
-      return new Observable<food[]>(observer => {
-        observer.next(this.foodsList);
-        observer.complete();
-      });
-    }
-    console.log("First fetch from service");
-    if (!this.foodsList$) {
-      const docRef = doc(this.firestore, 'nutrients', 'list');
-      const docSnap = await getDoc(docRef);
-      this.foodsList = (await docSnap).data()["foods"];
-      this.foodsList$ = new Observable<food[]>(observer => {
-        observer.next(this.foodsList);
-        observer.complete();
-      });
-    }
-    return this.foodsList$;
-  }
-}
+// Fetches entire nutrients list as food[]
+   public async getFoods(): Promise<Observable<food[]>> {
+     if (this.foodsList.length !== 0) {
+       console.log("Foods already fetched!")
+       return new Observable<food[]>(observer => {
+         observer.next(this.foodsList);
+         observer.complete();
+       });
+     }
+     console.log("First fetch from service");
+     if (!this.foodsList$) {
+       const docRef = doc(this.firestore, 'nutrients', 'list');
+       const docSnap = await getDoc(docRef);
+       this.foodsList = (await docSnap).data()["foods"];
+       this.foodsList$ = new Observable<food[]>(observer => {
+         observer.next(this.foodsList);
+         observer.complete();
+       });
+     }
+     return this.foodsList$;
+   }
+ }
+// public getFoods(): Observable<food[]> {
+//   if (this.foodsList.length !== 0) {
+//     console.log("foods already fetched!")
+//     return new Observable<food[]>(observer => {
+//       observer.next(this.foodsList);
+//       observer.complete();
+//     });
+//   }
+//   console.log("first fetch from service");
+//   if (!this.foodsList$) {
+//     const collectionInstance = collection(this.firestore, 'foods');
+//     this.foodsList$ = collectionData(collectionInstance) as Observable<food[]>;
+//     this.foodsList$.subscribe(val => {
+//       this.foodsList = val;
+//       let foods = val;
+//       setDoc(doc(this.firestore, "nutrients", "list"), {foods});
+//       console.log("asd", val);
+//     });
+//   }
+//   return this.foodsList$;
+// }}
+
 

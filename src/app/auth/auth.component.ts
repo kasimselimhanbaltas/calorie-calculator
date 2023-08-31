@@ -26,7 +26,7 @@ export class AuthComponent {
   hide = true;
   email: string;
   password: string;
-
+  confirmEmail: string;
 
   isLoginMode = true;
   isLoading = false;
@@ -44,13 +44,15 @@ export class AuthComponent {
     });
    }  
 
-  switchLoginMode() {
-    this.isLoginMode = !this.isLoginMode;
+  switchLoginMode(mode) {
+    if(mode == "login") this.isLoginMode = true;
+    else this.isLoginMode = false
   }
 
   onSubmit(form: NgForm) {
     if (!form.valid) return;
     const email = form.value.email;
+    const confirmEmail = form.value.confirmEmail;
     const password = form.value.password;
 
     let authObs: Observable<AuthResponseData>;
@@ -59,6 +61,11 @@ export class AuthComponent {
     if (this.isLoginMode) {
       authObs = this.authService.login(email, password);
     } else {
+      if(email !== confirmEmail) {
+        this.error = "E-mail adresses does not match!"
+        this.isLoading = false;
+        return;
+      }
       authObs = this.authService.signup(email, password);
     }
     authObs.subscribe(

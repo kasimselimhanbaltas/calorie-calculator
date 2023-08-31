@@ -1,52 +1,74 @@
-<div class="row m-0 p-0">
-  <!-- [ngClass]="(theme == 'dark') ? 'bg-dark' : 'bg-info'" -->
-  <div class="col-10 col-sm-6 col-lg-5 col-xl-4 row text-center ms-auto me-auto bg-secondary p-2 p-md-5 py-4 rounded mt-5 justify-content-center position-relative main-container">
-    <img class="bgImage" src="assets/images/nutrients.jpg">
+<div class="mybg">
+  <div class="row m-0 p-0">
+    <!-- [ngClass]="(theme == 'dark') ? 'bg-dark' : 'bg-info'" -->
+    <div
+      class="col-10 col-sm-6 col-lg-5 col-xl-4 row text-center ms-auto me-auto bg-secondary p-2 p-md-5 py-4 rounded mt-5 justify-content-center position-relative main-container">
+      <img class="bgImage" src="assets/images/nutrients.jpg">
 
-    <div style="z-index: 10;">
-      <div *ngIf="error" class="alert alert-danger">
-        <p>{{ error }}</p>
-      </div>
-      <div *ngIf="isLoading">
-        <app-loading-spinner></app-loading-spinner>
-      </div>
-      <form #authForm="ngForm" (ngSubmit)="onSubmit(authForm)" *ngIf="!isLoading">
-        <div class="row">
-          <div class="col-12">
-            <h2 class="text-light" *ngIf="isLoginMode">Log in with your e-mail</h2>
-            <h2 class="text-light" *ngIf="!isLoginMode">Register with your e-mail</h2>
-          </div>
-          <mat-form-field class="col-12">
-            <mat-label>E-mail</mat-label>
-            <input matInput [(ngModel)]="email" placeholder="Ex: yourmail@mail.com" type="email" id="email" ngModel
-              name="email" required email>
-          </mat-form-field>
-  
-          <mat-form-field class="col-12">
-            <mat-label>Enter your password</mat-label>
-            <input matInput [type]="hide ? 'password' : 'text'" type="password" id="password" ngModel name="password"
-              required minlength="6">
-            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
-              [attr.aria-pressed]="hide">
-              <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-            </button>
-          </mat-form-field>
-  
-          <div class="col-5">
-            <button class="btn btn-primary bg-dark" type="submit" [disabled]="!authForm.valid">{{ isLoginMode ? 'Login' :
-              'Sign Up' }}</button>
-          </div>
-          <div class="col ms-auto">
-            <button type="button" class="btn btn-primary bg-dark" (click)="switchLoginMode()">Switch to {{ isLoginMode ? 'Sign Up' :
-              'Login'
-              }}</button>
-          </div>
+      <div style="z-index: 10;">
+        <div *ngIf="error" class="alert alert-danger">
+          <p>{{ error }}</p>
         </div>
-  
-      </form>
-  
-    </div>
-    </div>
-    
+        <div *ngIf="isLoading">
+          <app-loading-spinner></app-loading-spinner>
+        </div>
 
+
+
+        <form #authForm="ngForm" (ngSubmit)="onSubmit(authForm)" *ngIf="!isLoading">
+          <div class="row">
+            <div class="col-12 row">
+              <div class="col">
+                <h2 class="text-light mb-0" (click)="switchLoginMode('login')" [ngClass]="(isLoginMode) ? 'selectedMode' : '' ">Log in</h2>
+              </div>
+              <div class="col-1 pb-2">
+                <div class="bg-dark p-0" style="padding: 0; height: 30px; width: 2px;"></div>
+              </div>
+              <div class="col">
+                <h2 class="text-light mb-0" (click)="switchLoginMode('register')" [ngClass]="(!isLoginMode) ? 'selectedMode' : '' ">Register</h2>
+              </div>
+            </div>
+            <div class="col-11 bg-dark ms-auto me-auto" style="padding-top: 3px;"></div>
+            <mat-form-field class="col-12 mt-3">
+              <mat-label>E-mail</mat-label>
+              <input matInput [(ngModel)]="email" placeholder="Ex: yourmail@mail.com" type="email" id="email" ngModel
+                name="email" required email>
+            </mat-form-field>
+
+            <mat-form-field *ngIf="!isLoginMode" class="col-12">
+              <mat-label>Confirm E-mail</mat-label>
+              <input matInput [(ngModel)]="confirmEmail" placeholder="Ex: yourmail@mail.com" type="confirmEmail" id="confirmEmail" ngModel
+                name="confirmEmail" required email>
+            </mat-form-field>
+
+            <mat-form-field class="col-12">
+              <mat-label>Enter your password</mat-label>
+              <input matInput [type]="hide ? 'password' : 'text'" type="password" id="password" ngModel name="password"
+                required minlength="6">
+              <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                [attr.aria-pressed]="hide">
+                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+              </button>
+            </mat-form-field>
+
+            <div class="ms-auto col-5">
+              <button class="btn btn-primary bg-dark" type="submit" [disabled]="!authForm.valid">{{ isLoginMode ?
+                'Login' :
+                'Sign Up' }}</button>
+            </div>
+            <!-- <div class="col ms-auto">
+              <button type="button" class="btn btn-primary bg-dark" (click)="switchLoginMode()">Switch to {{ isLoginMode
+                ? 'Sign Up' :
+                'Login'
+                }}</button>
+            </div> -->
+          </div>
+
+        </form>
+
+      </div>
+    </div>
+
+
+  </div>
 </div>
